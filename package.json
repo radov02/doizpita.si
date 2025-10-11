@@ -1,0 +1,27 @@
+{
+  "name": "doizpita-si",
+  "version": "1.0.0",
+  "description": "Platforma za uspešno pridobitev vozniškega dovoljenja",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx live-server --port=3000",
+    "build": "echo 'Static site - no build process needed'",
+    "dev": "npx live-server --port=3000 --watch=css,js"
+  },
+  "keywords": [
+    "driving-license",
+    "slovenia",
+    "avtošola",
+    "vozniški-izpit"
+  ],
+  "author": "DoIzpita.si Team",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/doizpita-si"
+  },
+  "homepage": "https://doizpita.si"
+}

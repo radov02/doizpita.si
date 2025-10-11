@@ -1,0 +1,23 @@
+<!-- Placeholder for hero driving illustration -->
+<!-- This would be replaced with actual driving-themed illustration -->
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="400" fill="#f8fafc"/>
+  
+  <!-- Car illustration -->
+  <rect x="150" y="200" width="300" height="120" rx="20" fill="#2563eb" opacity="0.8"/>
+  <circle cx="200" cy="320" r="30" fill="#1f2937"/>
+  <circle cx="400" cy="320" r="30" fill="#1f2937"/>
+  <rect x="180" y="220" width="240" height="60" rx="10" fill="#3b82f6"/>
+  
+  <!-- Road -->
+  <rect x="0" y="350" width="600" height="50" fill="#374151"/>
+  <rect x="0" y="370" width="600" height="10" fill="#fbbf24" opacity="0.6"/>
+  
+  <!-- Background elements -->
+  <circle cx="500" cy="100" r="40" fill="#fbbf24" opacity="0.3"/>
+  <rect x="50" y="150" width="80" height="100" fill="#10b981" opacity="0.3"/>
+  <rect x="450" y="120" width="60" height="120" fill="#10b981" opacity="0.3"/>
+  
+  <!-- Text overlay -->
+  <text x="300" y="50" text-anchor="middle" fill="#1f2937" font-family="Inter, sans-serif" font-size="24" font-weight="600">Vozniški izpit</text>
+</svg>

@@ -50,8 +50,8 @@ body {
     font-size: 1.5rem;
 }
 
-/* Hero Section */
-.hero-section {
+/* Initial Section */
+.initial-section {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
     min-height: 100vh;
     display: flex;
@@ -60,7 +60,7 @@ body {
     overflow: hidden;
 }
 
-.hero-section::before {
+.initial-section::before {
     content: '';
     position: absolute;
     top: 0;
@@ -167,7 +167,7 @@ footer .social-links a:hover {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .hero-section {
+    .initial-section {
         min-height: 80vh;
         padding: 2rem 0;
     }
@@ -208,4 +208,8 @@ footer .social-links a:hover {
 
 .fade-in {
     animation: fadeIn 0.6s ease-out;
+}
+
+.text-muted {
+    color: white !important;
 }

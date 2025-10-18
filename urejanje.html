@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <!-- Character encoding - must be first -->
+    <meta charset="UTF-8">
+    
+    <!-- Viewport for responsive design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Urejanje kartic ponudnikov - DoIzpita.si">
+    <meta name="keywords" content="urejanje, admin, upravljanje kartic">
+    <meta name="author" content="DoIzpita.si">
+    
+    <!-- Page Title -->
+    <title>Urejanje Kartic - DoIzpita.si</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    
+    <!-- CSS Resources - External first, then custom -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <!-- Master-Detail styles are now in css/style.css -->
+</head>
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="visually-hidden-focusable">Preskoči na glavno vsebino</a>
+    
+    <!-- Header Navigation -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm" role="navigation" aria-label="Glavna navigacija">
+            <div class="container">
+                <a class="navbar-brand fw-bold text-primary" href="index.html" aria-label="Domov - DoIzpita.si">
+                    <img src="images/logo.svg" alt="DoIzpita.si logotip" width="32" height="32" class="me-2">
+                    DoIzpita.si
+                </a>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Preklopi navigacijo">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Domov</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="avtosole-seznam.html">Seznam avtošol</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="avtosola_page.html">Upravljanje Avtošole</a>
+                        </li>
+                    </ul>
+                    
+                    <div class="d-flex">
+                        <a href="urejanje.html" class="btn btn-primary">
+                            <i class="fas fa-edit me-1"></i> Urejanje Kartic
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" style="padding-top: 80px;">
+        <div class="container py-5">
+            <!-- Page Header -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h1 class="display-5 fw-bold text-primary mb-2">
+                        <i class="fas fa-edit me-2"></i> Urejanje Kartic Ponudnikov
+                    </h1>
+                    <p class="lead text-secondary">Upravljajte kartice za zdravniške preglede, CPP predavanja in avtošole</p>
+                </div>
+            </div>
+
+            <!-- Category Selection -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="mb-3"><i class="fas fa-filter me-2"></i>Kategorija</h5>
+                            <div class="category-tabs">
+                                <button class="category-tab active" onclick="filterByCategory('all')">
+                                    <i class="fas fa-th me-1"></i> Vse kartice
+                                </button>
+                                <button class="category-tab" onclick="filterByCategory('health')">
+                                    <i class="fas fa-heartbeat me-1"></i> Zdravniški pregledi
+                                </button>
+                                <button class="category-tab" onclick="filterByCategory('cpp')">
+                                    <i class="fas fa-chalkboard-teacher me-1"></i> CPP predavanja
+                                </button>
+                                <button class="category-tab" onclick="filterByCategory('driving-school')">
+                                    <i class="fas fa-car me-1"></i> Avtošole
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Bar -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                        <div>
+                            <button class="btn btn-primary" onclick="addNewCard()">
+                                <i class="fas fa-plus me-2"></i> Dodaj Novo Kartico
+                            </button>
+                            <button class="btn btn-outline-secondary" onclick="exportData()">
+                                <i class="fas fa-download me-2"></i> Izvozi
+                            </button>
+                        </div>
+                        <div class="text-secondary small">
+                            <i class="fas fa-info-circle me-1"></i>
+                            <span id="cardCount">0</span> kartic
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Master-Detail Container -->
+            <div class="master-detail-container">
+                <!-- Master List -->
+                <div class="master-list">
+                    <!-- Search and Filter Box -->
+                    <div class="search-filter-box">
+                        <div class="input-group mb-2">
+                            <span class="input-group-text bg-white border-end-0">
+                                <i class="fas fa-search text-secondary"></i>
+                            </span>
+                            <input type="text" class="form-control border-start-0 ps-0" placeholder="Išči ponudnike..." id="searchInput" onkeyup="filterCards()">
+                        </div>
+                        <select class="form-select form-select-sm" id="locationFilter" onchange="filterCards()">
+                            <option value="">Vse lokacije</option>
+                            <option value="Ljubljana">Ljubljana</option>
+                            <option value="Maribor">Maribor</option>
+                            <option value="Celje">Celje</option>
+                            <option value="Kranj">Kranj</option>
+                            <option value="Koper">Koper</option>
+                            <option value="Novo mesto">Novo mesto</option>
+                            <option value="Nova Gorica">Nova Gorica</option>
+                            <option value="Murska Sobota">Murska Sobota</option>
+                        </select>
+                    </div>
+                    
+                    <!-- List Items -->
+                    <div id="cardList">
+                        <!-- Cards will be dynamically inserted here -->
+                    </div>
+                </div>
+
+                <!-- Detail View -->
+                <div class="detail-view" id="detailView">
+                    <div class="empty-state">
+                        <i class="fas fa-hand-pointer"></i>
+                        <h4>Izberite kartico za ogled</h4>
+                        <p>Kliknite na kartico na seznamu ali dodajte novo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2024 DoIzpita.si - Vsi pravice pridržane</p>
+        </div>
+    </footer>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title text-danger" id="deleteModalLabel">
+                        <i class="fas fa-exclamation-triangle me-2"></i> Potrditev Brisanja
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-0">Ali ste prepričani, da želite izbrisati to kartico?</p>
+                    <p class="text-secondary mb-0"><strong id="deleteCardName"></strong></p>
+                    <p class="text-danger mt-2 mb-0"><small>To dejanje ni mogoče razveljaviti.</small></p>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Prekliči</button>
+                    <button type="button" class="btn btn-danger" onclick="confirmDelete()">
+                        <i class="fas fa-trash me-1"></i> Izbriši
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Sample data structure for provider cards
+        let providerCards = [
+            {
+                id: 1,
+                type: 'health',
+                name: 'Zdravstveni dom Ljubljana',
+                location: 'Ljubljana',
+                rating: 4.8,
+                reviewCount: 127,
+                recommended: true,
+                status: 'active',
+                description: 'Zagotavljamo hitre in kakovostne zdravniške preglede za vse kategorije vozniških dovoljenj.',
+                schedule: 'Pon-Pet 8:00-16:00',
+                phone: '01 234 567',
+                email: 'zd-ljubljana@lj.si',
+                website: 'www.zd-lj.si',
+                image: 'images/zdlj.jpg',
+                prices: [
+                    { label: 'Pregled za B kategorijo', amount: 25 },
+                    { label: 'Pregled za A kategorijo', amount: 30 }
+                ],
+                categories: ['B', 'A', 'C']
+            },
+            {
+                id: 2,
+                type: 'health',
+                name: 'Zdravstveni dom Maribor',
+                location: 'Maribor',
+                rating: 4.6,
+                reviewCount: 89,
+                recommended: false,
+                status: 'active',
+                description: 'Strokovni pregledi z dolgoletnimi izkušnjami.',
+                schedule: 'Pon-Pet 7:30-15:30',
+                phone: '02 345 678',
+                email: 'info@zd-mb.si',
+                website: 'www.zd-mb.si',
+                image: 'images/zdmb.jpg',
+                prices: [
+                    { label: 'Pregled za B kategorijo', amount: 20 },
+                    { label: 'Pregled za A kategorijo', amount: 35 }
+                ],
+                categories: ['B', 'A']
+            },
+            {
+                id: 3,
+                type: 'cpp',
+                name: 'CPP Center Ljubljana',
+                location: 'Ljubljana',
+                rating: 4.9,
+                reviewCount: 234,
+                recommended: true,
+                status: 'active',
+                description: 'Interaktivna predavanja s sodobnimi učnimi metodami.',
+                schedule: 'Vsak dan',
+                phone: '01 345 789',
+                email: 'info@cpp-lj.si',
+                website: 'www.cpp-lj.si',
+                image: 'images/cpp-lj.jpg',
+                prices: [
+                    { label: 'CPP tečaj', amount: 50 }
+                ],
+                categories: ['B', 'A', 'C', 'D']
+            },
+            {
+                id: 4,
+                type: 'cpp',
+                name: 'Šola vožnje Alfa-go',
+                location: 'Novo mesto',
+                rating: 4.8,
+                reviewCount: 127,
+                recommended: true,
+                status: 'active',
+                description: 'CPP predavanja z izkušenimi predavatelji.',
+                schedule: 'Fleksibilni termini',
+                phone: '07 345 678',
+                email: 'info@alfago.si',
+                website: 'alfago.si',
+                image: 'images/alfago.webp',
+                prices: [
+                    { label: 'Tečaj za B kategorijo', amount: 110 },
+                    { label: 'Tečaj za A kategorijo', amount: 130 }
+                ],
+                categories: ['B', 'A', 'A1', 'BE'],
+                instructors: ['Marko Novak', 'Ana Kovač'],
+                locations: ['Novo mesto', 'Krško', 'Črnomelj']
+            },
+            {
+                id: 5,
+                type: 'driving-school',
+                name: 'Avtošola ABC',
+                location: 'Ljubljana',
+                rating: 4.7,
+                reviewCount: 156,
+                recommended: false,
+                status: 'active',
+                description: 'Moderna avtošola z individualnim pristopom.',
+                schedule: 'Pon-Sob',
+                phone: '01 456 789',
+                email: 'info@abc-avtosola.si',
+                website: 'www.abc-avtosola.si',
+                image: 'images/avtosola-abc.jpg',
+                prices: [
+                    { label: 'Osnovni paket B', amount: 890 },
+                    { label: 'Dodatna ura', amount: 45 }
+                ],
+                categories: ['B', 'A'],
+                instructors: ['Janez Novak', 'Maja Horvat'],
+                locations: ['Ljubljana', 'Domžale']
+            }
+        ];
+
+        let currentCardId = null;
+        let isEditMode = false;
+        let cardToDelete = null;
+        let currentCategory = 'all';
+
+        // Initialize the page
+        function init() {
+            renderCardList();
+            updateCardCount();
+        }
+
+        // Update card count display
+        function updateCardCount() {
+            const visibleCards = providerCards.filter(card => {
+                if (currentCategory === 'all') return true;
+                return card.type === currentCategory;
+            });
+            document.getElementById('cardCount').textContent = visibleCards.length;
+        }
+
+        // Filter by category
+        function filterByCategory(category) {
+            currentCategory = category;
+            
+            // Update active tab
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            renderCardList();
+            updateCardCount();
+            
+            // Clear detail view if current card doesn't match filter
+            if (currentCardId) {
+                const card = providerCards.find(c => c.id === currentCardId);
+                if (card && category !== 'all' && card.type !== category) {
+                    showEmptyState();
+                    currentCardId = null;
+                }
+            }
+        }
+
+        // Render the list of cards
+        function renderCardList() {
+            const listContainer = document.getElementById('cardList');
+            listContainer.innerHTML = '';
+
+            let filteredCards = providerCards.filter(card => {
+                if (currentCategory === 'all') return true;
+                return card.type === currentCategory;
+            });
+
+            if (filteredCards.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="p-4 text-center text-secondary">
+                        <i class="fas fa-inbox fa-3x mb-3 opacity-25"></i>
+                        <p>Ni kartic za prikaz</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filteredCards.forEach(card => {
+                const typeIcon = card.type === 'health' ? 'fa-heartbeat' : 
+                               card.type === 'cpp' ? 'fa-chalkboard-teacher' : 'fa-car';
+                const typeColor = card.type === 'health' ? 'danger' : 
+                                card.type === 'cpp' ? 'info' : 'success';
+                const statusBadge = card.status === 'active' 
+                    ? '<span class="badge bg-success badge-status">Aktiven</span>' 
+                    : '<span class="badge bg-secondary badge-status">Neaktiven</span>';
+                const recommendedBadge = card.recommended 
+                    ? '<span class="badge bg-warning badge-status">Priporočeno</span>' 
+                    : '';
+                
+                const listItem = document.createElement('div');
+                listItem.className = 'list-item';
+                listItem.onclick = () => selectCard(card.id);
+                listItem.innerHTML = `
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <div class="flex-grow-1">
+                            <div class="list-item-title">${card.name}</div>
+                            <div class="list-item-meta">
+                                <span class="badge badge-type bg-${typeColor}">
+                                    <i class="fas ${typeIcon}"></i>
+                                </span>
+                                <span><i class="fas fa-map-marker-alt"></i> ${card.location}</span>
+                                <span><i class="fas fa-star text-warning"></i> ${card.rating}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-1">
+                        ${statusBadge}
+                        ${recommendedBadge}
+                    </div>
+                `;
+                
+                if (currentCardId === card.id) {
+                    listItem.classList.add('active');
+                }
+                
+                listContainer.appendChild(listItem);
+            });
+        }
+
+        // Filter cards based on search and location
+        function filterCards() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const locationFilter = document.getElementById('locationFilter').value;
+            const listItems = document.querySelectorAll('.list-item');
+            
+            providerCards.forEach((card, index) => {
+                const listItem = listItems[index];
+                if (!listItem) return;
+                
+                const matchesSearch = card.name.toLowerCase().includes(searchTerm) || 
+                                    card.location.toLowerCase().includes(searchTerm);
+                const matchesLocation = !locationFilter || card.location === locationFilter;
+                const matchesCategory = currentCategory === 'all' || card.type === currentCategory;
+                
+                if (matchesSearch && matchesLocation && matchesCategory) {
+                    listItem.style.display = 'block';
+                } else {
+                    listItem.style.display = 'none';
+                }
+            });
+        }
+
+        // Select a card and show details
+        function selectCard(id) {
+            currentCardId = id;
+            isEditMode = false;
+            renderCardList();
+            showCardDetails(id);
+        }
+
+        // Show empty state
+        function showEmptyState() {
+            const detailView = document.getElementById('detailView');
+            detailView.className = 'detail-view';
+            detailView.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-hand-pointer"></i>
+                    <h4>Izberite kartico za ogled</h4>
+                    <p>Kliknite na kartico na seznamu ali dodajte novo</p>
+                </div>
+            `;
+        }
+
+        // Show card details in detail view
+        function showCardDetails(id) {
+            const card = providerCards.find(c => c.id === id);
+            if (!card) return;
+
+            const detailView = document.getElementById('detailView');
+            detailView.className = 'detail-view view-mode';
+            
+            const typeLabel = card.type === 'health' ? 'Zdravniški pregled' : 
+                            card.type === 'cpp' ? 'CPP predavanje' : 'Avtošola';
+            
+            const pricesHtml = card.prices.map((price, index) => `
+                <div class="price-item mb-2" data-price-index="${index}">
+                    <div class="row g-2">
+                        <div class="col-md-7">
+                            <input type="text" class="form-control form-control-sm price-label" value="${price.label}" readonly>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group input-group-sm">
+                                <input type="number" class="form-control price-amount" value="${price.amount}" readonly>
+                                <span class="input-group-text">€</span>
+                            </div>
+                        </div>
+                        <div class="col-md-1 d-none edit-only">
+                            <button class="btn btn-sm btn-outline-danger" onclick="removePrice(${index})" type="button">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            const categoriesHtml = card.categories.map(cat => `
+                <span class="badge bg-secondary me-1">${cat}</span>
+            `).join('');
+
+            const instructorsField = card.instructors ? `
+                <div class="col-md-12">
+                    <label for="cardInstructors" class="form-label">Inštruktorji</label>
+                    <input type="text" class="form-control" id="cardInstructors" value="${card.instructors.join(', ')}" readonly>
+                    <small class="text-muted">Ločeno z vejico</small>
+                </div>
+            ` : '';
+
+            const locationsField = card.locations ? `
+                <div class="col-md-12">
+                    <label for="cardLocations" class="form-label">Dodatne Lokacije</label>
+                    <input type="text" class="form-control" id="cardLocations" value="${card.locations.join(', ')}" readonly>
+                    <small class="text-muted">Ločeno z vejico</small>
+                </div>
+            ` : '';
+            
+            detailView.innerHTML = `
+                <div class="detail-header">
+                    <div>
+                        <h2 class="mb-1">${card.name}</h2>
+                        <div class="d-flex gap-2 flex-wrap mt-2">
+                            <span class="badge ${card.status === 'active' ? 'bg-success' : 'bg-secondary'}">
+                                ${card.status === 'active' ? 'Aktiven' : 'Neaktiven'}
+                            </span>
+                            <span class="badge bg-primary">${typeLabel}</span>
+                            ${card.recommended ? '<span class="badge bg-warning">Priporočeno</span>' : ''}
+                        </div>
+                    </div>
+                    <div class="detail-actions">
+                        <button class="btn btn-outline-primary btn-sm-custom" onclick="toggleEditMode()">
+                            <i class="fas fa-edit me-1"></i> Uredi
+                        </button>
+                        <button class="btn btn-outline-danger btn-sm-custom" onclick="deleteCard(${card.id})">
+                            <i class="fas fa-trash me-1"></i> Izbriši
+                        </button>
+                    </div>
+                </div>
+
+                <form id="detailForm">
+                    <input type="hidden" id="cardId" value="${card.id}">
+                    
+                    <!-- Basic Information -->
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <i class="fas fa-info-circle"></i> Osnovni Podatki
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-8">
+                                <label for="cardName" class="form-label">Naziv</label>
+                                <input type="text" class="form-control" id="cardName" value="${card.name}" readonly>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="cardType" class="form-label">Tip</label>
+                                <select class="form-select" id="cardType" disabled>
+                                    <option value="health" ${card.type === 'health' ? 'selected' : ''}>Zdravniški pregled</option>
+                                    <option value="cpp" ${card.type === 'cpp' ? 'selected' : ''}>CPP predavanje</option>
+                                    <option value="driving-school" ${card.type === 'driving-school' ? 'selected' : ''}>Avtošola</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="cardDescription" class="form-label">Opis</label>
+                                <textarea class="form-control" id="cardDescription" rows="3" readonly>${card.description}</textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Location & Contact -->
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <i class="fas fa-map-marker-alt"></i> Lokacija in Kontakt
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="cardLocation" class="form-label">Glavna Lokacija</label>
+                                <select class="form-select" id="cardLocation" disabled>
+                                    <option value="Ljubljana" ${card.location === 'Ljubljana' ? 'selected' : ''}>Ljubljana</option>
+                                    <option value="Maribor" ${card.location === 'Maribor' ? 'selected' : ''}>Maribor</option>
+                                    <option value="Celje" ${card.location === 'Celje' ? 'selected' : ''}>Celje</option>
+                                    <option value="Kranj" ${card.location === 'Kranj' ? 'selected' : ''}>Kranj</option>
+                                    <option value="Koper" ${card.location === 'Koper' ? 'selected' : ''}>Koper</option>
+                                    <option value="Novo mesto" ${card.location === 'Novo mesto' ? 'selected' : ''}>Novo mesto</option>
+                                    <option value="Nova Gorica" ${card.location === 'Nova Gorica' ? 'selected' : ''}>Nova Gorica</option>
+                                    <option value="Murska Sobota" ${card.location === 'Murska Sobota' ? 'selected' : ''}>Murska Sobota</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="cardSchedule" class="form-label">Urnik</label>
+                                <input type="text" class="form-control" id="cardSchedule" value="${card.schedule}" readonly>
+                            </div>
+                            ${locationsField}
+                            <div class="col-md-4">
+                                <label for="cardPhone" class="form-label">Telefon</label>
+                                <input type="tel" class="form-control" id="cardPhone" value="${card.phone}" readonly>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="cardEmail" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="cardEmail" value="${card.email}" readonly>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="cardWebsite" class="form-label">Spletna Stran</label>
+                                <input type="text" class="form-control" id="cardWebsite" value="${card.website}" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rating & Reviews -->
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <i class="fas fa-star"></i> Ocena in Priporočila
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label for="cardRating" class="form-label">Ocena</label>
+                                <div class="rating-display">
+                                    <input type="number" class="form-control" id="cardRating" value="${card.rating}" step="0.1" min="0" max="5" readonly>
+                                    <span class="ms-2">
+                                        <i class="fas fa-star text-warning"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="cardReviewCount" class="form-label">Število Ocen</label>
+                                <input type="number" class="form-control" id="cardReviewCount" value="${card.reviewCount}" readonly>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Priporočeno</label>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="cardRecommended" ${card.recommended ? 'checked' : ''} disabled>
+                                    <label class="form-check-label" for="cardRecommended">
+                                        Prikaži kot priporočeno
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Prices -->
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <i class="fas fa-euro-sign"></i> Cene
+                        </div>
+                        <div id="pricesList">
+                            ${pricesHtml}
+                        </div>
+                        <button type="button" class="btn btn-sm btn-outline-primary mt-2 d-none edit-only" onclick="addPrice()">
+                            <i class="fas fa-plus me-1"></i> Dodaj Ceno
+                        </button>
+                    </div>
+
+                    <!-- Categories -->
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <i class="fas fa-tags"></i> Kategorije in Dodatno
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-12">
+                                <label for="cardCategories" class="form-label">Kategorije Vozil</label>
+                                <input type="text" class="form-control" id="cardCategories" value="${card.categories.join(', ')}" readonly>
+                                <small class="text-muted">Ločeno z vejico (npr. B, A, C)</small>
+                            </div>
+                            ${instructorsField}
+                        </div>
+                    </div>
+
+                    <!-- Image -->
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <i class="fas fa-image"></i> Slika
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-12">
+                                <label for="cardImage" class="form-label">Pot do Slike</label>
+                                <input type="text" class="form-control" id="cardImage" value="${card.image}" readonly>
+                                ${card.image ? `<img src="${card.image}" alt="Preview" class="image-preview">` : ''}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Status -->
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <i class="fas fa-toggle-on"></i> Status
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="cardStatus" class="form-label">Status Kartice</label>
+                                <select class="form-select" id="cardStatus" disabled>
+                                    <option value="active" ${card.status === 'active' ? 'selected' : ''}>Aktiven</option>
+                                    <option value="inactive" ${card.status === 'inactive' ? 'selected' : ''}>Neaktiven</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons (hidden in view mode) -->
+                    <div class="d-none" id="editActions">
+                        <div class="d-flex gap-2 justify-content-end mt-4">
+                            <button type="button" class="btn btn-secondary" onclick="cancelEdit()">
+                                <i class="fas fa-times me-1"></i> Prekliči
+                            </button>
+                            <button type="button" class="btn btn-success" onclick="saveCard()">
+                                <i class="fas fa-save me-1"></i> Shrani Spremembe
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            `;
+        }
+
+        // Toggle edit mode
+        function toggleEditMode() {
+            isEditMode = !isEditMode;
+            const detailView = document.getElementById('detailView');
+            const editActions = document.getElementById('editActions');
+            
+            if (isEditMode) {
+                detailView.className = 'detail-view edit-mode';
+                editActions.classList.remove('d-none');
+                
+                // Show edit-only elements
+                document.querySelectorAll('.edit-only').forEach(el => {
+                    el.classList.remove('d-none');
+                });
+                
+                // Enable all form fields
+                document.getElementById('cardName').removeAttribute('readonly');
+                document.getElementById('cardType').removeAttribute('disabled');
+                document.getElementById('cardDescription').removeAttribute('readonly');
+                document.getElementById('cardLocation').removeAttribute('disabled');
+                document.getElementById('cardSchedule').removeAttribute('readonly');
+                if (document.getElementById('cardLocations')) {
+                    document.getElementById('cardLocations').removeAttribute('readonly');
+                }
+                document.getElementById('cardPhone').removeAttribute('readonly');
+                document.getElementById('cardEmail').removeAttribute('readonly');
+                document.getElementById('cardWebsite').removeAttribute('readonly');
+                document.getElementById('cardRating').removeAttribute('readonly');
+                document.getElementById('cardReviewCount').removeAttribute('readonly');
+                document.getElementById('cardRecommended').removeAttribute('disabled');
+                document.getElementById('cardCategories').removeAttribute('readonly');
+                if (document.getElementById('cardInstructors')) {
+                    document.getElementById('cardInstructors').removeAttribute('readonly');
+                }
+                document.getElementById('cardImage').removeAttribute('readonly');
+                document.getElementById('cardStatus').removeAttribute('disabled');
+                
+                // Enable price inputs
+                document.querySelectorAll('.price-label, .price-amount').forEach(input => {
+                    input.removeAttribute('readonly');
+                });
+                
+                // Hide the header action buttons
+                document.querySelector('.detail-actions').classList.add('d-none');
+            } else {
+                detailView.className = 'detail-view view-mode';
+                editActions.classList.add('d-none');
+                
+                // Re-render to reset all changes
+                if (currentCardId) {
+                    showCardDetails(currentCardId);
+                }
+            }
+        }
+
+        // Cancel edit mode
+        function cancelEdit() {
+            isEditMode = false;
+            if (currentCardId) {
+                showCardDetails(currentCardId);
+            }
+        }
+
+        // Add price field
+        function addPrice() {
+            const pricesList = document.getElementById('pricesList');
+            const index = pricesList.children.length;
+            const priceHtml = `
+                <div class="price-item mb-2" data-price-index="${index}">
+                    <div class="row g-2">
+                        <div class="col-md-7">
+                            <input type="text" class="form-control form-control-sm price-label" placeholder="Opis cene" value="">
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group input-group-sm">
+                                <input type="number" class="form-control price-amount" value="0">
+                                <span class="input-group-text">€</span>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <button class="btn btn-sm btn-outline-danger" onclick="removePrice(${index})" type="button">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            pricesList.insertAdjacentHTML('beforeend', priceHtml);
+        }
+
+        // Remove price field
+        function removePrice(index) {
+            const priceItem = document.querySelector(`[data-price-index="${index}"]`);
+            if (priceItem) {
+                priceItem.remove();
+            }
+        }
+
+        // Save card changes
+        function saveCard() {
+            const id = parseInt(document.getElementById('cardId').value);
+            const card = providerCards.find(c => c.id === id);
+            
+            if (card) {
+                card.name = document.getElementById('cardName').value;
+                card.type = document.getElementById('cardType').value;
+                card.description = document.getElementById('cardDescription').value;
+                card.location = document.getElementById('cardLocation').value;
+                card.schedule = document.getElementById('cardSchedule').value;
+                card.phone = document.getElementById('cardPhone').value;
+                card.email = document.getElementById('cardEmail').value;
+                card.website = document.getElementById('cardWebsite').value;
+                card.rating = parseFloat(document.getElementById('cardRating').value);
+                card.reviewCount = parseInt(document.getElementById('cardReviewCount').value);
+                card.recommended = document.getElementById('cardRecommended').checked;
+                card.categories = document.getElementById('cardCategories').value.split(',').map(s => s.trim()).filter(s => s);
+                card.image = document.getElementById('cardImage').value;
+                card.status = document.getElementById('cardStatus').value;
+                
+                // Save prices
+                card.prices = [];
+                document.querySelectorAll('.price-item').forEach(item => {
+                    const label = item.querySelector('.price-label').value;
+                    const amount = parseFloat(item.querySelector('.price-amount').value);
+                    if (label && amount) {
+                        card.prices.push({ label, amount });
+                    }
+                });
+                
+                // Save optional fields
+                if (document.getElementById('cardInstructors')) {
+                    card.instructors = document.getElementById('cardInstructors').value.split(',').map(s => s.trim()).filter(s => s);
+                }
+                if (document.getElementById('cardLocations')) {
+                    card.locations = document.getElementById('cardLocations').value.split(',').map(s => s.trim()).filter(s => s);
+                }
+                
+                isEditMode = false;
+                renderCardList();
+                showCardDetails(id);
+                updateCardCount();
+                
+                showToast('Spremembe so bile uspešno shranjene!', 'success');
+            }
+        }
+
+        // Delete card (show confirmation modal)
+        function deleteCard(id) {
+            const card = providerCards.find(c => c.id === id);
+            if (card) {
+                cardToDelete = id;
+                document.getElementById('deleteCardName').textContent = card.name;
+                const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+                deleteModal.show();
+            }
+        }
+
+        // Confirm deletion
+        function confirmDelete() {
+            if (cardToDelete) {
+                providerCards = providerCards.filter(card => card.id !== cardToDelete);
+                
+                const deleteModal = bootstrap.Modal.getInstance(document.getElementById('deleteModal'));
+                deleteModal.hide();
+                
+                currentCardId = null;
+                cardToDelete = null;
+                
+                renderCardList();
+                showEmptyState();
+                updateCardCount();
+                
+                showToast('Kartica je bila uspešno izbrisana!', 'danger');
+            }
+        }
+
+        // Add new card
+        function addNewCard() {
+            const newId = Math.max(...providerCards.map(c => c.id), 0) + 1;
+            const newCard = {
+                id: newId,
+                type: 'health',
+                name: 'Nova Kartica',
+                location: 'Ljubljana',
+                rating: 0,
+                reviewCount: 0,
+                recommended: false,
+                status: 'active',
+                description: 'Opis nove kartice',
+                schedule: 'Pon-Pet',
+                phone: '01 234 567',
+                email: 'info@example.com',
+                website: 'www.example.com',
+                image: '',
+                prices: [
+                    { label: 'Osnovna storitev', amount: 0 }
+                ],
+                categories: ['B']
+            };
+            
+            providerCards.unshift(newCard);
+            currentCardId = newId;
+            currentCategory = 'all';
+            
+            // Update category tabs
+            document.querySelectorAll('.category-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.category-tab')[0].classList.add('active');
+            
+            renderCardList();
+            showCardDetails(newId);
+            toggleEditMode();
+            updateCardCount();
+            
+            showToast('Nova kartica je bila dodana. Izpolnite podatke in shranite.', 'info');
+        }
+
+        // Export data
+        function exportData() {
+            const dataStr = JSON.stringify(providerCards, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'provider-cards-export.json';
+            link.click();
+            URL.revokeObjectURL(url);
+            
+            showToast('Podatki so bili izvoženi!', 'success');
+        }
+
+        // Show toast notification
+        function showToast(message, type = 'success') {
+            const toastHtml = `
+                <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+                    <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="toast-header bg-${type} text-white">
+                            <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'danger' ? 'exclamation-circle' : 'info-circle'} me-2"></i>
+                            <strong class="me-auto">Obvestilo</strong>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                        <div class="toast-body">
+                            ${message}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', toastHtml);
+            
+            setTimeout(() => {
+                const toastElement = document.querySelector('.toast');
+                if (toastElement) {
+                    toastElement.parentElement.remove();
+                }
+            }, 3000);
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

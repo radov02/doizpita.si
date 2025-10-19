@@ -1,23 +1,240 @@
-<!-- Placeholder for hero driving illustration -->
-<!-- This would be replaced with actual driving-themed illustration -->
 <svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
-  <rect width="600" height="400" fill="#f8fafc"/>
-  
-  <!-- Car illustration -->
-  <rect x="150" y="200" width="300" height="120" rx="20" fill="#2563eb" opacity="0.8"/>
-  <circle cx="200" cy="320" r="30" fill="#1f2937"/>
-  <circle cx="400" cy="320" r="30" fill="#1f2937"/>
-  <rect x="180" y="220" width="240" height="60" rx="10" fill="#3b82f6"/>
-  
-  <!-- Road -->
-  <rect x="0" y="350" width="600" height="50" fill="#374151"/>
-  <rect x="0" y="370" width="600" height="10" fill="#fbbf24" opacity="0.6"/>
-  
-  <!-- Background elements -->
-  <circle cx="500" cy="100" r="40" fill="#fbbf24" opacity="0.3"/>
-  <rect x="50" y="150" width="80" height="100" fill="#10b981" opacity="0.3"/>
-  <rect x="450" y="120" width="60" height="120" fill="#10b981" opacity="0.3"/>
-  
-  <!-- Text overlay -->
-  <text x="300" y="50" text-anchor="middle" fill="#1f2937" font-family="Inter, sans-serif" font-size="24" font-weight="600">Vozniški izpit</text>
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e0f6ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f0f9ff;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Filters for modern effects -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="400" fill="url(#bgGradient)"/>
+
+  <!-- Animated background elements -->
+  <g opacity="0.1">
+    <!-- Expanding circles -->
+    <circle cx="150" cy="120" r="20" fill="#3b82f6">
+      <animate attributeName="r" values="20;60;20" dur="8s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.1;0.3;0.1" dur="8s" repeatCount="indefinite"/>
+    </circle>
+
+    <circle cx="450" cy="280" r="25" fill="#10b981">
+      <animate attributeName="r" values="25;70;25" dur="10s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.1;0.25;0.1" dur="10s" repeatCount="indefinite"/>
+    </circle>
+
+    <circle cx="80" cy="300" r="15" fill="#f59e0b">
+      <animate attributeName="r" values="15;45;15" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.1;0.2;0.1" dur="6s" repeatCount="indefinite"/>
+    </circle>
+
+    <circle cx="520" cy="100" r="18" fill="#8b5cf6">
+      <animate attributeName="r" values="18;50;18" dur="9s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.1;0.22;0.1" dur="9s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Driving Scene Background (low opacity) -->
+  <!-- Main Driving Scene -->
+  <g>
+    <!-- Sun -->
+    <circle cx="500" cy="80" r="40" fill="#facc15" opacity="0.9">
+      <animate attributeName="r" values="38;44;38" dur="4s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="4s" repeatCount="indefinite" />
+    </circle>
+
+    <!-- Clouds -->
+    <g fill="white" opacity="0.8">
+      <circle cx="100" cy="100" r="25"/>
+      <circle cx="115" cy="95" r="20"/>
+      <circle cx="130" cy="100" r="22"/>
+      <circle cx="85" cy="105" r="18"/>
+    </g>
+    <g fill="white" opacity="0.7">
+      <circle cx="520" cy="80" r="30"/>
+      <circle cx="540" cy="75" r="25"/>
+      <circle cx="560" cy="80" r="28"/>
+      <circle cx="500" cy="85" r="20"/>
+    </g>
+    <g fill="white" opacity="0.9">
+      <circle cx="300" cy="120" r="20"/>
+      <circle cx="315" cy="115" r="18"/>
+      <circle cx="330" cy="120" r="19"/>
+    </g>
+    <g fill="white" opacity="0.6">
+      <circle cx="50" cy="70" r="15"/>
+      <circle cx="60" cy="65" r="12"/>
+      <circle cx="70" cy="70" r="14"/>
+    </g>
+    <g fill="white" opacity="0.8">
+      <circle cx="400" cy="90" r="18"/>
+      <circle cx="415" cy="85" r="15"/>
+      <circle cx="430" cy="90" r="16"/>
+      <circle cx="390" cy="95" r="13"/>
+    </g>
+    <g fill="white" opacity="0.7">
+      <circle cx="200" cy="50" r="22"/>
+      <circle cx="215" cy="45" r="18"/>
+      <circle cx="230" cy="50" r="20"/>
+    </g>
+
+    <!-- Distant mountains -->
+    <g opacity="0.3" fill="#6B7280">
+      <polygon points="0,250 100,150 200,250"/>
+      <polygon points="150,240 250,140 350,240"/>
+      <polygon points="300,260 400,160 500,260"/>
+      <polygon points="450,250 550,150 650,250"/>
+      <polygon points="600,240 700,140 800,240"/>
+      <polygon points="750,260 850,160 950,260"/>
+      <polygon points="900,250 1000,150 1100,250"/>
+      <polygon points="1050,240 1150,140 1250,240"/>
+      <!-- Duplicates for continuous scroll -->
+      <polygon points="1200,250 1300,150 1400,250"/>
+      <polygon points="1350,240 1450,140 1550,240"/>
+      <polygon points="1500,260 1600,160 1700,260"/>
+      <polygon points="1650,250 1750,150 1850,250"/>
+      <polygon points="1800,240 1900,140 2000,240"/>
+      <polygon points="1950,260 2050,160 2150,260"/>
+      <polygon points="2100,250 2200,150 2300,250"/>
+      <polygon points="2250,240 2350,140 2450,240"/>
+      <animateTransform attributeName="transform" type="translate" from="0 0" to="-1200 0" dur="48s" repeatCount="indefinite"/>
+    </g>
+
+    <!-- Distant trees -->
+    <g opacity="0.4">
+      <!-- Tree 1 -->
+      <rect x="76" y="220" width="8" height="100" fill="#8B4513"/>
+      <ellipse cx="80" cy="200" rx="30" ry="35" fill="#047857"/>
+      <!-- Tree 2 -->
+      <rect x="146" y="210" width="8" height="110" fill="#8B4513"/>
+      <ellipse cx="150" cy="190" rx="35" ry="40" fill="#059669"/>
+      <!-- Tree 3 -->
+      <rect x="246" y="230" width="8" height="90" fill="#8B4513"/>
+      <ellipse cx="250" cy="210" rx="25" ry="30" fill="#047857"/>
+      <!-- Tree 4 -->
+      <rect x="396" y="200" width="8" height="120" fill="#8B4513"/>
+      <ellipse cx="400" cy="180" rx="40" ry="45" fill="#059669"/>
+      <!-- Tree 5 -->
+      <rect x="546" y="215" width="8" height="105" fill="#8B4513"/>
+      <ellipse cx="550" cy="195" rx="32" ry="37" fill="#047857"/>
+      <!-- Tree 6 -->
+      <rect x="316" y="225" width="8" height="95" fill="#8B4513"/>
+      <ellipse cx="320" cy="205" rx="27" ry="32" fill="#047857"/>
+      <!-- Tree 7 -->
+      <rect x="476" y="205" width="8" height="115" fill="#8B4513"/>
+      <ellipse cx="480" cy="185" rx="30" ry="35" fill="#059669"/>
+      <!-- Duplicates for continuous scroll -->
+      <!-- Tree 1 dup -->
+      <rect x="676" y="220" width="8" height="100" fill="#8B4513"/>
+      <ellipse cx="680" cy="200" rx="30" ry="35" fill="#047857"/>
+      <!-- Tree 2 dup -->
+      <rect x="746" y="210" width="8" height="110" fill="#8B4513"/>
+      <ellipse cx="750" cy="190" rx="35" ry="40" fill="#059669"/>
+      <!-- Tree 3 dup -->
+      <rect x="846" y="230" width="8" height="90" fill="#8B4513"/>
+      <ellipse cx="850" cy="210" rx="25" ry="30" fill="#047857"/>
+      <!-- Tree 4 dup -->
+      <rect x="996" y="200" width="8" height="120" fill="#8B4513"/>
+      <ellipse cx="1000" cy="180" rx="40" ry="45" fill="#059669"/>
+      <!-- Tree 5 dup -->
+      <rect x="1146" y="215" width="8" height="105" fill="#8B4513"/>
+      <ellipse cx="1150" cy="195" rx="32" ry="37" fill="#047857"/>
+      <!-- Tree 6 dup -->
+      <rect x="916" y="225" width="8" height="95" fill="#8B4513"/>
+      <ellipse cx="920" cy="205" rx="27" ry="32" fill="#047857"/>
+      <!-- Tree 7 dup -->
+      <rect x="1076" y="205" width="8" height="115" fill="#8B4513"/>
+      <ellipse cx="1080" cy="185" rx="30" ry="35" fill="#059669"/>
+      <animateTransform attributeName="transform" type="translate" from="0 0" to="-600 0" dur="12s" repeatCount="indefinite"/>
+    </g>
+
+    <!-- Road -->
+    <rect x="0" y="300" width="600" height="20" fill="#22c55e"/> <!-- Grass verge -->
+    <rect x="0" y="320" width="600" height="80" fill="#374151" />
+    <!-- Scrolling road divider -->
+    <line x1="0" y1="360" x2="600" y2="360" stroke="white" stroke-width="10" stroke-dasharray="20 20">
+      <animateTransform attributeName="transform" type="translate" from="0 0" to="-40 0" dur="1.5s" repeatCount="indefinite"/>
+    </line>
+
+    <!-- Cool Blue Car -->
+    <g>
+      <!-- Speed lines -->
+      <g opacity="0.5">
+        <line x1="90" y1="270" x2="115" y2="270" stroke="#3b82f6" stroke-width="4" stroke-linecap="round">
+          <animate attributeName="opacity" values="0.3;0.6;0.3" dur="0.6s" repeatCount="indefinite"/>
+        </line>
+        <line x1="85" y1="300" x2="113" y2="300" stroke="#3b82f6" stroke-width="4" stroke-linecap="round">
+          <animate attributeName="opacity" values="0.3;0.5;0.3" dur="0.7s" repeatCount="indefinite"/>
+        </line>
+        <line x1="80" y1="330" x2="110" y2="330" stroke="#3b82f6" stroke-width="4" stroke-linecap="round">
+          <animate attributeName="opacity" values="0.3;0.6;0.3" dur="0.8s" repeatCount="indefinite"/>
+        </line>
+      </g>
+
+      <!-- Shadow -->
+      <ellipse cx="300" cy="350" rx="140" ry="15" fill="black" opacity="0.25">
+        <animate attributeName="rx" values="140;145;140" dur="2s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.2;0.3;0.2" dur="2s" repeatCount="indefinite"/>
+      </ellipse>
+
+      <!-- Car Body -->
+      <defs>
+        <linearGradient id="carGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:1" />
+          <stop offset="50%" style="stop-color:#3b82f6;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#2563eb;stop-opacity:1" />
+        </linearGradient>
+      </defs>
+
+      <!-- Main car body -->
+      <rect x="140" y="290" width="320" height="50" rx="10" fill="url(#carGradient)" stroke="#1e40af" stroke-width="4"/>
+      <!-- Car cabin/roof -->
+      <path d="M 190 290 L 215 245 L 385 245 L 410 290 Z" fill="url(#carGradient)" stroke="#1e40af" stroke-width="4"/>
+      <!-- Front windshield -->
+      <path d="M 197 287 L 218 252 L 285 252 L 298 287 Z" fill="#93c5fd" stroke="#1e40af" stroke-width="3" opacity="0.7"/>
+      <!-- Rear windshield -->
+      <path d="M 312 287 L 325 252 L 383 252 L 403 287 Z" fill="#93c5fd" stroke="#1e40af" stroke-width="3" opacity="0.7"/>
+      <!-- Headlight -->
+      <circle cx="148" cy="310" r="11" fill="#fca5a5" stroke="#dc2626" stroke-width="2">
+        <animate attributeName="opacity" values="0.8;1;0.8" dur="1.5s" repeatCount="indefinite"/>
+      </circle>
+      <!-- Taillight -->
+      <circle cx="452" cy="310" r="11" fill="#fef3c7" stroke="#fbbf24" stroke-width="2"/>
+      <!-- Door line -->
+      <line x1="300" y1="298" x2="300" y2="335" stroke="#1e40af" stroke-width="4"/>
+      <!-- Front wheel -->
+      <circle cx="220" cy="340" r="30" fill="#1f2937" stroke="#000" stroke-width="4"/>
+      <circle cx="220" cy="340" r="16" fill="#374151"/>
+      <circle cx="220" cy="340" r="7" fill="#9ca3af"/>
+      <!-- Rear wheel -->
+      <circle cx="380" cy="340" r="30" fill="#1f2937" stroke="#000" stroke-width="4"/>
+      <circle cx="380" cy="340" r="16" fill="#374151"/>
+      <circle cx="380" cy="340" r="7" fill="#9ca3af"/>
+
+      <!-- Smooth bobbing animation (no forward movement) -->
+      <animateTransform
+        attributeName="transform"
+        type="translate"
+        values="0,0; 0,-1; 0,-2; 0,-1; 0,0; 0,1; 0,2; 0,1; 0,0"
+        dur="4s"
+        repeatCount="indefinite"/>
+    </g>
+  </g>
+
 </svg>

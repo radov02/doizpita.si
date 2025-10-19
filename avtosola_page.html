@@ -1,403 +1,493 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="sl">
-<head>
+  <head>
     <!-- Character encoding - must be first -->
-    <meta charset="UTF-8">
-    
+    <meta charset="UTF-8" />
+
     <!-- Viewport for responsive design -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Upravljajte podatke vaše avtošole - DoIzpita.si">
-    <meta name="keywords" content="avtošola, upravljanje, administracija">
-    <meta name="author" content="DoIzpita.si">
-    
+    <meta
+      name="description"
+      content="Upravljajte podatke vaše avtošole - DoIzpita.si"
+    />
+    <meta name="keywords" content="avtošola, upravljanje, administracija" />
+    <meta name="author" content="DoIzpita.si" />
+
     <!-- Page Title -->
     <title>Upravljanje Avtošole - DoIzpita.si</title>
-    
+
     <!-- Preconnect for performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+
     <!-- CSS Resources - External first, then custom -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/components.css">
-    
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/components.css" />
+
     <style>
-        /* Master-Detail Specific Styles */
+      /* Master-Detail Specific Styles */
+      .master-detail-container {
+        display: flex;
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+
+      .master-list {
+        flex: 0 0 350px;
+        background: white;
+        border-radius: var(--border-radius-md);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        max-height: 70vh;
+        overflow-y: auto;
+      }
+
+      .detail-view {
+        flex: 1;
+        background: white;
+        border-radius: var(--border-radius-md);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        min-height: 70vh;
+      }
+
+      .list-item {
+        padding: 1rem 1.25rem;
+        border-bottom: 1px solid var(--border-color);
+        cursor: pointer;
+        transition: var(--transition-base);
+      }
+
+      .list-item:hover {
+        background-color: var(--light-gray);
+      }
+
+      .list-item.active {
+        background-color: #dbeafe;
+        border-left: 4px solid var(--primary-color);
+      }
+
+      .list-item-title {
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
+      }
+
+      .list-item-meta {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+      }
+
+      .empty-state {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        color: var(--text-secondary);
+      }
+
+      .empty-state i {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        opacity: 0.3;
+      }
+
+      .detail-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid var(--border-color);
+      }
+
+      .detail-actions {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .form-section {
+        margin-bottom: 2rem;
+      }
+
+      .form-section-title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .view-mode .form-control,
+      .view-mode .form-select {
+        background-color: var(--light-gray);
+        border: 1px solid var(--border-color);
+      }
+
+      .edit-mode .form-control:focus,
+      .edit-mode .form-select:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.25);
+      }
+
+      @media (max-width: 992px) {
         .master-detail-container {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 2rem;
+          flex-direction: column;
         }
-        
+
         .master-list {
-            flex: 0 0 350px;
-            background: white;
-            border-radius: var(--border-radius-md);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            max-height: 70vh;
-            overflow-y: auto;
+          flex: 1;
+          max-height: 40vh;
         }
-        
-        .detail-view {
-            flex: 1;
-            background: white;
-            border-radius: var(--border-radius-md);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            padding: 2rem;
-            min-height: 70vh;
-        }
-        
-        .list-item {
-            padding: 1rem 1.25rem;
-            border-bottom: 1px solid var(--border-color);
-            cursor: pointer;
-            transition: var(--transition-base);
-        }
-        
-        .list-item:hover {
-            background-color: var(--light-gray);
-        }
-        
-        .list-item.active {
-            background-color: #dbeafe;
-            border-left: 4px solid var(--primary-color);
-        }
-        
-        .list-item-title {
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.25rem;
-        }
-        
-        .list-item-meta {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-        }
-        
-        .empty-state {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            color: var(--text-secondary);
-        }
-        
-        .empty-state i {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            opacity: 0.3;
-        }
-        
-        .detail-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid var(--border-color);
-        }
-        
-        .detail-actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-        
-        .form-section {
-            margin-bottom: 2rem;
-        }
-        
-        .form-section-title {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        .view-mode .form-control,
-        .view-mode .form-select {
-            background-color: var(--light-gray);
-            border: 1px solid var(--border-color);
-        }
-        
-        .edit-mode .form-control:focus,
-        .edit-mode .form-select:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.25);
-        }
-        
-        @media (max-width: 992px) {
-            .master-detail-container {
-                flex-direction: column;
-            }
-            
-            .master-list {
-                flex: 1;
-                max-height: 40vh;
-            }
-        }
-        
-        .search-box {
-            padding: 1rem 1.25rem;
-            border-bottom: 2px solid var(--border-color);
-            background: var(--light-gray);
-        }
-        
-        .badge-status {
-            font-size: 0.75rem;
-            padding: 0.25rem 0.5rem;
-            border-radius: 12px;
-        }
+      }
+
+      .search-box {
+        padding: 1rem 1.25rem;
+        border-bottom: 2px solid var(--border-color);
+        background: var(--light-gray);
+      }
+
+      .badge-status {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+        border-radius: 12px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Skip to main content for accessibility -->
-    <a href="#main-content" class="visually-hidden-focusable">Preskoči na glavno vsebino</a>
-    
+    <a href="#main-content" class="visually-hidden-focusable"
+      >Preskoči na glavno vsebino</a
+    >
+
     <!-- Header Navigation -->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm" role="navigation" aria-label="Glavna navigacija">
-            <div class="container">
-                <a class="navbar-brand fw-bold text-primary" href="index.html" aria-label="Domov - DoIzpita.si">
-                    DoIzpita.si
+      <nav
+        class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm"
+        role="navigation"
+        aria-label="Glavna navigacija"
+      >
+        <div class="container">
+          <a
+            class="navbar-brand fw-bold text-primary"
+            href="index.html"
+            aria-label="Domov - DoIzpita.si"
+          >
+            DoIzpita.si
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Preklopi navigacijo"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Domov</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="moja-pot-do-izpita.html"
+                  >Moja pot do izpita</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="avtosole-seznam.html"
+                  >Seznam avtošol</a
+                >
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link"
+                  href="#"
+                  id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Storitve
                 </a>
-                
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Preklopi navigacijo">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html">Domov</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="moja-pot-do-izpita.html">Moja pot do izpita</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="avtosole-seznam.html">Seznam avtošol</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Storitve
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="zdravniski-pregled.html">Zdravniški pregled</a></li>
-                                <li><a class="dropdown-item" href="CPP-predavanja.html">CPP predavanja</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="o-nas.html">O nas</a>
-                        </li>
-                    </ul>
-                    
-                    <div class="d-flex">
-                        <a href="avtosola_page.html" class="btn btn-primary">
-                            <i class="fas fa-user me-1"></i> Moja Avtošola
-                        </a>
-                    </div>
-                </div>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li>
+                    <a class="dropdown-item" href="zdravniski-pregled.html"
+                      >Zdravniški pregled</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="CPP-predavanja.html"
+                      >CPP predavanja</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="o-nas.html">O nas</a>
+              </li>
+            </ul>
+
+            <div class="d-flex">
+              <a href="avtosola_page.html" class="btn btn-primary">
+                <i class="fas fa-user me-1"></i> Moja Avtošola
+              </a>
             </div>
-        </nav>
+          </div>
+        </div>
+      </nav>
     </header>
 
     <!-- Main Content -->
-    <main id="main-content" style="padding-top: 80px;">
-        <div class="container py-5">
-            <!-- Page Header -->
-            <div class="row mb-4">
-                <div class="col-12">
-                    <h1 class="display-5 fw-bold text-primary mb-2">
-                        <i class="fas fa-car-side me-2"></i> Upravljanje Podatkov Avtošole
-                    </h1>
-                    <p class="lead text-secondary">Pregledujte, urejajte in upravljajte vaše podatke</p>
-                </div>
-            </div>
-
-            <!-- Action Bar -->
-            <div class="row mb-4">
-                <div class="col-12">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <button class="btn btn-primary" onclick="addNewItem()">
-                                <i class="fas fa-plus me-2"></i> Dodaj Nov Paket
-                            </button>
-                        </div>
-                        <div class="text-secondary">
-                            <i class="fas fa-info-circle me-1"></i>
-                            Kliknite na element za ogled in urejanje
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Master-Detail Container -->
-            <div class="master-detail-container">
-                <!-- Master List -->
-                <div class="master-list">
-                    <!-- Search Box -->
-                    <div class="search-box">
-                        <div class="input-group">
-                            <span class="input-group-text bg-white border-end-0">
-                                <i class="fas fa-search text-secondary"></i>
-                            </span>
-                            <input type="text" class="form-control border-start-0 ps-0" placeholder="Išči pakete..." id="searchInput" onkeyup="filterItems()">
-                        </div>
-                    </div>
-                    
-                    <!-- List Items -->
-                    <div id="itemList">
-                        <!-- Items will be dynamically inserted here -->
-                    </div>
-                </div>
-
-                <!-- Detail View -->
-                <div class="detail-view" id="detailView">
-                    <div class="empty-state">
-                        <i class="fas fa-hand-pointer"></i>
-                        <h4>Izberite element za ogled podrobnosti</h4>
-                        <p>Kliknite na element na seznamu ali dodajte nov paket</p>
-                    </div>
-                </div>
-            </div>
+    <main id="main-content" style="padding-top: 80px">
+      <div class="container py-5">
+        <!-- Page Header -->
+        <div class="row mb-4">
+          <div class="col-12">
+            <h1 class="display-5 fw-bold text-primary mb-2">
+              <i class="fas fa-car-side me-2"></i> Upravljanje Podatkov Avtošole
+            </h1>
+            <p class="lead text-secondary">
+              Pregledujte, urejajte in upravljajte vaše podatke
+            </p>
+          </div>
         </div>
+
+        <!-- Action Bar -->
+        <div class="row mb-4">
+          <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <button class="btn btn-primary" onclick="addNewItem()">
+                  <i class="fas fa-plus me-2"></i> Dodaj Nov Paket
+                </button>
+              </div>
+              <div class="text-secondary">
+                <i class="fas fa-info-circle me-1"></i>
+                Kliknite na element za ogled in urejanje
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Master-Detail Container -->
+        <div class="master-detail-container">
+          <!-- Master List -->
+          <div class="master-list">
+            <!-- Search Box -->
+            <div class="search-box">
+              <div class="input-group">
+                <span class="input-group-text bg-white border-end-0">
+                  <i class="fas fa-search text-secondary"></i>
+                </span>
+                <input
+                  type="text"
+                  class="form-control border-start-0 ps-0"
+                  placeholder="Išči pakete..."
+                  id="searchInput"
+                  onkeyup="filterItems()"
+                />
+              </div>
+            </div>
+
+            <!-- List Items -->
+            <div id="itemList">
+              <!-- Items will be dynamically inserted here -->
+            </div>
+          </div>
+
+          <!-- Detail View -->
+          <div class="detail-view" id="detailView">
+            <div class="empty-state">
+              <i class="fas fa-hand-pointer"></i>
+              <h4>Izberite element za ogled podrobnosti</h4>
+              <p>Kliknite na element na seznamu ali dodajte nov paket</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
 
     <!-- Footer -->
     <footer class="bg-dark text-light py-4 mt-5">
-        <div class="container text-center">
-            <p class="mb-0">&copy; 2024 DoIzpita.si - Vsi pravice pridržane</p>
-        </div>
+      <div class="container text-center">
+        <p class="mb-0">&copy; 2024 DoIzpita.si - Vsi pravice pridržane</p>
+      </div>
     </footer>
 
     <!-- Delete Confirmation Modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header border-0">
-                    <h5 class="modal-title text-danger" id="deleteModalLabel">
-                        <i class="fas fa-exclamation-triangle me-2"></i> Potrditev Brisanja
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p class="mb-0">Ali ste prepričani, da želite izbrisati ta paket?</p>
-                    <p class="text-secondary mb-0"><strong id="deleteItemName"></strong></p>
-                    <p class="text-danger mt-2 mb-0"><small>To dejanje ni mogoče razveljaviti.</small></p>
-                </div>
-                <div class="modal-footer border-0">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Prekliči</button>
-                    <button type="button" class="btn btn-danger" onclick="confirmDelete()">
-                        <i class="fas fa-trash me-1"></i> Izbriši
-                    </button>
-                </div>
-            </div>
+    <div
+      class="modal fade"
+      id="deleteModal"
+      tabindex="-1"
+      aria-labelledby="deleteModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header border-0">
+            <h5 class="modal-title text-danger" id="deleteModalLabel">
+              <i class="fas fa-exclamation-triangle me-2"></i> Potrditev
+              Brisanja
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p class="mb-0">
+              Ali ste prepričani, da želite izbrisati ta paket?
+            </p>
+            <p class="text-secondary mb-0">
+              <strong id="deleteItemName"></strong>
+            </p>
+            <p class="text-danger mt-2 mb-0">
+              <small>To dejanje ni mogoče razveljaviti.</small>
+            </p>
+          </div>
+          <div class="modal-footer border-0">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Prekliči
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              onclick="confirmDelete()"
+            >
+              <i class="fas fa-trash me-1"></i> Izbriši
+            </button>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <script>
-        // Sample data structure for driving school packages
-        let drivingSchoolData = [
-            {
-                id: 1,
-                name: 'Osnovni Paket B Kategorija',
-                category: 'B',
-                price: 890,
-                duration: '30 ur',
-                location: 'Ljubljana',
-                status: 'active',
-                description: 'Osnovni paket za kategorijo B vključuje teoretični in praktični del usposabljanja.',
-                includes: 'Teorija, 30 ur vožnje, učno gradivo',
-                instructor: 'Marko Novak',
-                startDate: '2024-11-01'
-            },
-            {
-                id: 2,
-                name: 'Intenzivni Paket B Kategorija',
-                category: 'B',
-                price: 1190,
-                duration: '40 ur',
-                location: 'Ljubljana',
-                status: 'active',
-                description: 'Intenzivni paket za hiter napredek in pripravo na izpit.',
-                includes: 'Teorija, 40 ur vožnje, učno gradivo, dodatna podpora',
-                instructor: 'Ana Kovač',
-                startDate: '2024-11-15'
-            },
-            {
-                id: 3,
-                name: 'Dodatne Ure Vožnje',
-                category: 'B',
-                price: 45,
-                duration: '1 ura',
-                location: 'Maribor',
-                status: 'active',
-                description: 'Dodatne ure vožnje za tiste, ki potrebujejo več prakse.',
-                includes: '1 ura vožnje z inštruktorjem',
-                instructor: 'Janez Horvat',
-                startDate: '2024-10-20'
-            },
-            {
-                id: 4,
-                name: 'Paket A Kategorija - Motorji',
-                category: 'A',
-                price: 750,
-                duration: '25 ur',
-                location: 'Celje',
-                status: 'inactive',
-                description: 'Paket za pridobitev vozniškega dovoljenja kategorije A za motorna kolesa.',
-                includes: 'Teorija, 25 ur vožnje, zaščitna oprema',
-                instructor: 'Petra Zupan',
-                startDate: '2024-12-01'
-            }
-        ];
+      // Sample data structure for driving school packages
+      let drivingSchoolData = [
+        {
+          id: 1,
+          name: "Osnovni Paket B Kategorija",
+          category: "B",
+          price: 890,
+          duration: "30 ur",
+          location: "Ljubljana",
+          status: "active",
+          description:
+            "Osnovni paket za kategorijo B vključuje teoretični in praktični del usposabljanja.",
+          includes: "Teorija, 30 ur vožnje, učno gradivo",
+          instructor: "Marko Novak",
+          startDate: "2024-11-01",
+        },
+        {
+          id: 2,
+          name: "Intenzivni Paket B Kategorija",
+          category: "B",
+          price: 1190,
+          duration: "40 ur",
+          location: "Ljubljana",
+          status: "active",
+          description:
+            "Intenzivni paket za hiter napredek in pripravo na izpit.",
+          includes: "Teorija, 40 ur vožnje, učno gradivo, dodatna podpora",
+          instructor: "Ana Kovač",
+          startDate: "2024-11-15",
+        },
+        {
+          id: 3,
+          name: "Dodatne Ure Vožnje",
+          category: "B",
+          price: 45,
+          duration: "1 ura",
+          location: "Maribor",
+          status: "active",
+          description:
+            "Dodatne ure vožnje za tiste, ki potrebujejo več prakse.",
+          includes: "1 ura vožnje z inštruktorjem",
+          instructor: "Janez Horvat",
+          startDate: "2024-10-20",
+        },
+        {
+          id: 4,
+          name: "Paket A Kategorija - Motorji",
+          category: "A",
+          price: 750,
+          duration: "25 ur",
+          location: "Celje",
+          status: "inactive",
+          description:
+            "Paket za pridobitev vozniškega dovoljenja kategorije A za motorna kolesa.",
+          includes: "Teorija, 25 ur vožnje, zaščitna oprema",
+          instructor: "Petra Zupan",
+          startDate: "2024-12-01",
+        },
+      ];
 
-        let currentItemId = null;
-        let isEditMode = false;
-        let itemToDelete = null;
+      let currentItemId = null;
+      let isEditMode = false;
+      let itemToDelete = null;
 
-        // Initialize the page
-        function init() {
-            renderItemList();
-        }
+      // Initialize the page
+      function init() {
+        renderItemList();
+      }
 
-        // Render the list of items
-        function renderItemList() {
-            const listContainer = document.getElementById('itemList');
-            listContainer.innerHTML = '';
+      // Render the list of items
+      function renderItemList() {
+        const listContainer = document.getElementById("itemList");
+        listContainer.innerHTML = "";
 
-            if (drivingSchoolData.length === 0) {
-                listContainer.innerHTML = `
+        if (drivingSchoolData.length === 0) {
+          listContainer.innerHTML = `
                     <div class="p-4 text-center text-secondary">
                         <i class="fas fa-inbox fa-3x mb-3 opacity-25"></i>
                         <p>Ni paketov za prikaz</p>
                     </div>
                 `;
-                return;
-            }
+          return;
+        }
 
-            drivingSchoolData.forEach(item => {
-                const statusBadge = item.status === 'active' 
-                    ? '<span class="badge bg-success badge-status">Aktiven</span>' 
-                    : '<span class="badge bg-secondary badge-status">Neaktiven</span>';
-                
-                const listItem = document.createElement('div');
-                listItem.className = 'list-item';
-                listItem.onclick = () => selectItem(item.id);
-                listItem.innerHTML = `
+        drivingSchoolData.forEach((item) => {
+          const statusBadge =
+            item.status === "active"
+              ? '<span class="badge bg-success badge-status">Aktiven</span>'
+              : '<span class="badge bg-secondary badge-status">Neaktiven</span>';
+
+          const listItem = document.createElement("div");
+          listItem.className = "list-item";
+          listItem.onclick = () => selectItem(item.id);
+          listItem.innerHTML = `
                     <div class="d-flex justify-content-between align-items-start">
                         <div class="flex-grow-1">
                             <div class="list-item-title">${item.name}</div>
@@ -409,37 +499,37 @@
                         <div>${statusBadge}</div>
                     </div>
                 `;
-                
-                if (currentItemId === item.id) {
-                    listItem.classList.add('active');
-                }
-                
-                listContainer.appendChild(listItem);
-            });
-        }
 
-        // Select an item and show details
-        function selectItem(id) {
-            currentItemId = id;
-            isEditMode = false;
-            renderItemList();
-            showItemDetails(id);
-        }
+          if (currentItemId === item.id) {
+            listItem.classList.add("active");
+          }
 
-        // Show item details in detail view
-        function showItemDetails(id) {
-            const item = drivingSchoolData.find(i => i.id === id);
-            if (!item) return;
+          listContainer.appendChild(listItem);
+        });
+      }
 
-            const detailView = document.getElementById('detailView');
-            detailView.className = 'detail-view view-mode';
-            
-            detailView.innerHTML = `
+      // Select an item and show details
+      function selectItem(id) {
+        currentItemId = id;
+        isEditMode = false;
+        renderItemList();
+        showItemDetails(id);
+      }
+
+      // Show item details in detail view
+      function showItemDetails(id) {
+        const item = drivingSchoolData.find((i) => i.id === id);
+        if (!item) return;
+
+        const detailView = document.getElementById("detailView");
+        detailView.className = "detail-view view-mode";
+
+        detailView.innerHTML = `
                 <div class="detail-header">
                     <div>
                         <h2 class="mb-0">${item.name}</h2>
-                        <span class="badge ${item.status === 'active' ? 'bg-success' : 'bg-secondary'} mt-2">
-                            ${item.status === 'active' ? 'Aktiven' : 'Neaktiven'}
+                        <span class="badge ${item.status === "active" ? "bg-success" : "bg-secondary"} mt-2">
+                            ${item.status === "active" ? "Aktiven" : "Neaktiven"}
                         </span>
                     </div>
                     <div class="detail-actions">
@@ -468,10 +558,10 @@
                             <div class="col-md-4">
                                 <label for="itemCategory" class="form-label">Kategorija</label>
                                 <select class="form-select" id="itemCategory" disabled>
-                                    <option value="A" ${item.category === 'A' ? 'selected' : ''}>A - Motorji</option>
-                                    <option value="B" ${item.category === 'B' ? 'selected' : ''}>B - Osebna vozila</option>
-                                    <option value="C" ${item.category === 'C' ? 'selected' : ''}>C - Tovorna vozila</option>
-                                    <option value="D" ${item.category === 'D' ? 'selected' : ''}>D - Avtobusi</option>
+                                    <option value="A" ${item.category === "A" ? "selected" : ""}>A - Motorji</option>
+                                    <option value="B" ${item.category === "B" ? "selected" : ""}>B - Osebna vozila</option>
+                                    <option value="C" ${item.category === "C" ? "selected" : ""}>C - Tovorna vozila</option>
+                                    <option value="D" ${item.category === "D" ? "selected" : ""}>D - Avtobusi</option>
                                 </select>
                             </div>
                         </div>
@@ -513,14 +603,14 @@
                             <div class="col-md-6">
                                 <label for="itemLocation" class="form-label">Lokacija</label>
                                 <select class="form-select" id="itemLocation" disabled>
-                                    <option value="Ljubljana" ${item.location === 'Ljubljana' ? 'selected' : ''}>Ljubljana</option>
-                                    <option value="Maribor" ${item.location === 'Maribor' ? 'selected' : ''}>Maribor</option>
-                                    <option value="Celje" ${item.location === 'Celje' ? 'selected' : ''}>Celje</option>
-                                    <option value="Kranj" ${item.location === 'Kranj' ? 'selected' : ''}>Kranj</option>
-                                    <option value="Koper" ${item.location === 'Koper' ? 'selected' : ''}>Koper</option>
-                                    <option value="Novo mesto" ${item.location === 'Novo mesto' ? 'selected' : ''}>Novo mesto</option>
-                                    <option value="Nova Gorica" ${item.location === 'Nova Gorica' ? 'selected' : ''}>Nova Gorica</option>
-                                    <option value="Murska Sobota" ${item.location === 'Murska Sobota' ? 'selected' : ''}>Murska Sobota</option>
+                                    <option value="Ljubljana" ${item.location === "Ljubljana" ? "selected" : ""}>Ljubljana</option>
+                                    <option value="Maribor" ${item.location === "Maribor" ? "selected" : ""}>Maribor</option>
+                                    <option value="Celje" ${item.location === "Celje" ? "selected" : ""}>Celje</option>
+                                    <option value="Kranj" ${item.location === "Kranj" ? "selected" : ""}>Kranj</option>
+                                    <option value="Koper" ${item.location === "Koper" ? "selected" : ""}>Koper</option>
+                                    <option value="Novo mesto" ${item.location === "Novo mesto" ? "selected" : ""}>Novo mesto</option>
+                                    <option value="Nova Gorica" ${item.location === "Nova Gorica" ? "selected" : ""}>Nova Gorica</option>
+                                    <option value="Murska Sobota" ${item.location === "Murska Sobota" ? "selected" : ""}>Murska Sobota</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
@@ -552,8 +642,8 @@
                             <div class="col-md-6">
                                 <label for="itemStatus" class="form-label">Status Paketa</label>
                                 <select class="form-select" id="itemStatus" disabled>
-                                    <option value="active" ${item.status === 'active' ? 'selected' : ''}>Aktiven</option>
-                                    <option value="inactive" ${item.status === 'inactive' ? 'selected' : ''}>Neaktiven</option>
+                                    <option value="active" ${item.status === "active" ? "selected" : ""}>Aktiven</option>
+                                    <option value="inactive" ${item.status === "inactive" ? "selected" : ""}>Neaktiven</option>
                                 </select>
                             </div>
                         </div>
@@ -572,164 +662,177 @@
                     </div>
                 </form>
             `;
-        }
+      }
 
-        // Toggle edit mode
-        function toggleEditMode() {
-            isEditMode = !isEditMode;
-            const detailView = document.getElementById('detailView');
-            const editActions = document.getElementById('editActions');
-            
-            if (isEditMode) {
-                detailView.className = 'detail-view edit-mode';
-                editActions.classList.remove('d-none');
-                
-                // Enable all form fields
-                document.getElementById('itemName').removeAttribute('readonly');
-                document.getElementById('itemCategory').removeAttribute('disabled');
-                document.getElementById('itemDescription').removeAttribute('readonly');
-                document.getElementById('itemPrice').removeAttribute('readonly');
-                document.getElementById('itemDuration').removeAttribute('readonly');
-                document.getElementById('itemStartDate').removeAttribute('readonly');
-                document.getElementById('itemLocation').removeAttribute('disabled');
-                document.getElementById('itemInstructor').removeAttribute('readonly');
-                document.getElementById('itemIncludes').removeAttribute('readonly');
-                document.getElementById('itemStatus').removeAttribute('disabled');
-                
-                // Hide the header action buttons
-                document.querySelector('.detail-actions').classList.add('d-none');
-            } else {
-                detailView.className = 'detail-view view-mode';
-                editActions.classList.add('d-none');
-                
-                // Re-render to reset all changes
-                if (currentItemId) {
-                    showItemDetails(currentItemId);
-                }
-            }
-        }
+      // Toggle edit mode
+      function toggleEditMode() {
+        isEditMode = !isEditMode;
+        const detailView = document.getElementById("detailView");
+        const editActions = document.getElementById("editActions");
 
-        // Cancel edit mode
-        function cancelEdit() {
-            isEditMode = false;
-            if (currentItemId) {
-                showItemDetails(currentItemId);
-            }
-        }
+        if (isEditMode) {
+          detailView.className = "detail-view edit-mode";
+          editActions.classList.remove("d-none");
 
-        // Save item changes
-        function saveItem() {
-            const id = parseInt(document.getElementById('itemId').value);
-            const item = drivingSchoolData.find(i => i.id === id);
-            
-            if (item) {
-                item.name = document.getElementById('itemName').value;
-                item.category = document.getElementById('itemCategory').value;
-                item.description = document.getElementById('itemDescription').value;
-                item.price = parseFloat(document.getElementById('itemPrice').value);
-                item.duration = document.getElementById('itemDuration').value;
-                item.startDate = document.getElementById('itemStartDate').value;
-                item.location = document.getElementById('itemLocation').value;
-                item.instructor = document.getElementById('itemInstructor').value;
-                item.includes = document.getElementById('itemIncludes').value;
-                item.status = document.getElementById('itemStatus').value;
-                
-                isEditMode = false;
-                renderItemList();
-                showItemDetails(id);
-                
-                // Show success message
-                showToast('Spremembe so bile uspešno shranjene!', 'success');
-            }
-        }
+          // Enable all form fields
+          document.getElementById("itemName").removeAttribute("readonly");
+          document.getElementById("itemCategory").removeAttribute("disabled");
+          document
+            .getElementById("itemDescription")
+            .removeAttribute("readonly");
+          document.getElementById("itemPrice").removeAttribute("readonly");
+          document.getElementById("itemDuration").removeAttribute("readonly");
+          document.getElementById("itemStartDate").removeAttribute("readonly");
+          document.getElementById("itemLocation").removeAttribute("disabled");
+          document.getElementById("itemInstructor").removeAttribute("readonly");
+          document.getElementById("itemIncludes").removeAttribute("readonly");
+          document.getElementById("itemStatus").removeAttribute("disabled");
 
-        // Delete item (show confirmation modal)
-        function deleteItem(id) {
-            const item = drivingSchoolData.find(i => i.id === id);
-            if (item) {
-                itemToDelete = id;
-                document.getElementById('deleteItemName').textContent = item.name;
-                const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-                deleteModal.show();
-            }
-        }
+          // Hide the header action buttons
+          document.querySelector(".detail-actions").classList.add("d-none");
+        } else {
+          detailView.className = "detail-view view-mode";
+          editActions.classList.add("d-none");
 
-        // Confirm deletion
-        function confirmDelete() {
-            if (itemToDelete) {
-                drivingSchoolData = drivingSchoolData.filter(item => item.id !== itemToDelete);
-                
-                const deleteModal = bootstrap.Modal.getInstance(document.getElementById('deleteModal'));
-                deleteModal.hide();
-                
-                currentItemId = null;
-                itemToDelete = null;
-                
-                renderItemList();
-                
-                const detailView = document.getElementById('detailView');
-                detailView.className = 'detail-view';
-                detailView.innerHTML = `
+          // Re-render to reset all changes
+          if (currentItemId) {
+            showItemDetails(currentItemId);
+          }
+        }
+      }
+
+      // Cancel edit mode
+      function cancelEdit() {
+        isEditMode = false;
+        if (currentItemId) {
+          showItemDetails(currentItemId);
+        }
+      }
+
+      // Save item changes
+      function saveItem() {
+        const id = parseInt(document.getElementById("itemId").value);
+        const item = drivingSchoolData.find((i) => i.id === id);
+
+        if (item) {
+          item.name = document.getElementById("itemName").value;
+          item.category = document.getElementById("itemCategory").value;
+          item.description = document.getElementById("itemDescription").value;
+          item.price = parseFloat(document.getElementById("itemPrice").value);
+          item.duration = document.getElementById("itemDuration").value;
+          item.startDate = document.getElementById("itemStartDate").value;
+          item.location = document.getElementById("itemLocation").value;
+          item.instructor = document.getElementById("itemInstructor").value;
+          item.includes = document.getElementById("itemIncludes").value;
+          item.status = document.getElementById("itemStatus").value;
+
+          isEditMode = false;
+          renderItemList();
+          showItemDetails(id);
+
+          // Show success message
+          showToast("Spremembe so bile uspešno shranjene!", "success");
+        }
+      }
+
+      // Delete item (show confirmation modal)
+      function deleteItem(id) {
+        const item = drivingSchoolData.find((i) => i.id === id);
+        if (item) {
+          itemToDelete = id;
+          document.getElementById("deleteItemName").textContent = item.name;
+          const deleteModal = new bootstrap.Modal(
+            document.getElementById("deleteModal")
+          );
+          deleteModal.show();
+        }
+      }
+
+      // Confirm deletion
+      function confirmDelete() {
+        if (itemToDelete) {
+          drivingSchoolData = drivingSchoolData.filter(
+            (item) => item.id !== itemToDelete
+          );
+
+          const deleteModal = bootstrap.Modal.getInstance(
+            document.getElementById("deleteModal")
+          );
+          deleteModal.hide();
+
+          currentItemId = null;
+          itemToDelete = null;
+
+          renderItemList();
+
+          const detailView = document.getElementById("detailView");
+          detailView.className = "detail-view";
+          detailView.innerHTML = `
                     <div class="empty-state">
                         <i class="fas fa-hand-pointer"></i>
                         <h4>Izberite element za ogled podrobnosti</h4>
                         <p>Kliknite na element na seznamu ali dodajte nov paket</p>
                     </div>
                 `;
-                
-                showToast('Paket je bil uspešno izbrisan!', 'danger');
-            }
-        }
 
-        // Add new item
-        function addNewItem() {
-            const newId = Math.max(...drivingSchoolData.map(i => i.id), 0) + 1;
-            const newItem = {
-                id: newId,
-                name: 'Nov Paket',
-                category: 'B',
-                price: 0,
-                duration: '0 ur',
-                location: 'Ljubljana',
-                status: 'active',
-                description: 'Opis novega paketa',
-                includes: 'Vključeno v paket',
-                instructor: 'Ime inštruktorja',
-                startDate: new Date().toISOString().split('T')[0]
-            };
-            
-            drivingSchoolData.unshift(newItem);
-            currentItemId = newId;
-            renderItemList();
-            showItemDetails(newId);
-            toggleEditMode();
-            
-            showToast('Nov paket je bil dodan. Izpolnite podatke in shranite.', 'info');
+          showToast("Paket je bil uspešno izbrisan!", "danger");
         }
+      }
 
-        // Filter items based on search
-        function filterItems() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            const listItems = document.querySelectorAll('.list-item');
-            
-            listItems.forEach(item => {
-                const text = item.textContent.toLowerCase();
-                if (text.includes(searchTerm)) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        }
+      // Add new item
+      function addNewItem() {
+        const newId = Math.max(...drivingSchoolData.map((i) => i.id), 0) + 1;
+        const newItem = {
+          id: newId,
+          name: "Nov Paket",
+          category: "B",
+          price: 0,
+          duration: "0 ur",
+          location: "Ljubljana",
+          status: "active",
+          description: "Opis novega paketa",
+          includes: "Vključeno v paket",
+          instructor: "Ime inštruktorja",
+          startDate: new Date().toISOString().split("T")[0],
+        };
 
-        // Show toast notification
-        function showToast(message, type = 'success') {
-            // Create toast element
-            const toastHtml = `
+        drivingSchoolData.unshift(newItem);
+        currentItemId = newId;
+        renderItemList();
+        showItemDetails(newId);
+        toggleEditMode();
+
+        showToast(
+          "Nov paket je bil dodan. Izpolnite podatke in shranite.",
+          "info"
+        );
+      }
+
+      // Filter items based on search
+      function filterItems() {
+        const searchTerm = document
+          .getElementById("searchInput")
+          .value.toLowerCase();
+        const listItems = document.querySelectorAll(".list-item");
+
+        listItems.forEach((item) => {
+          const text = item.textContent.toLowerCase();
+          if (text.includes(searchTerm)) {
+            item.style.display = "block";
+          } else {
+            item.style.display = "none";
+          }
+        });
+      }
+
+      // Show toast notification
+      function showToast(message, type = "success") {
+        // Create toast element
+        const toastHtml = `
                 <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
                     <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
                         <div class="toast-header bg-${type} text-white">
-                            <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'danger' ? 'exclamation-circle' : 'info-circle'} me-2"></i>
+                            <i class="fas fa-${type === "success" ? "check-circle" : type === "danger" ? "exclamation-circle" : "info-circle"} me-2"></i>
                             <strong class="me-auto">Obvestilo</strong>
                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
                         </div>
@@ -739,20 +842,20 @@
                     </div>
                 </div>
             `;
-            
-            document.body.insertAdjacentHTML('beforeend', toastHtml);
-            
-            // Auto-remove after 3 seconds
-            setTimeout(() => {
-                const toastElement = document.querySelector('.toast');
-                if (toastElement) {
-                    toastElement.parentElement.remove();
-                }
-            }, 3000);
-        }
 
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', init);
+        document.body.insertAdjacentHTML("beforeend", toastHtml);
+
+        // Auto-remove after 3 seconds
+        setTimeout(() => {
+          const toastElement = document.querySelector(".toast");
+          if (toastElement) {
+            toastElement.parentElement.remove();
+          }
+        }, 3000);
+      }
+
+      // Initialize on page load
+      document.addEventListener("DOMContentLoaded", init);
     </script>
-</body>
+  </body>
 </html>

@@ -14,20 +14,36 @@
       </feMerge>
     </filter>
 
-    <filter id="softGlow">
-      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-      <feMerge>
-        <feMergeNode in="coloredBlur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
+    <!-- Fade mask: black (transparent) at edges -> white (opaque) center
+         Use explicit stop colors so mask works correctly when SVG is embedded as <img> -->
+    <linearGradient id="fadeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="1"/>
+      <stop offset="6%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="94%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="1"/>
+    </linearGradient>
+
+    <mask id="fadeMask" maskUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="600" height="400" fill="url(#fadeGradient)"/>
+    </mask>
+
+    <linearGradient id="leftFade" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2563eb;stop-opacity:0" />
+    </linearGradient>
+
+    <linearGradient id="rightFade" x1="100%" y1="0%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2563eb;stop-opacity:0" />
+    </linearGradient>
   </defs>
 
   <!-- Background -->
-  <rect width="600" height="400" fill="url(#bgGradient)"/>
+  <!-- <rect width="600" height="400" fill="url(#bgGradient)"/> -->
 
   <!-- Animated background elements -->
-  <g opacity="0.1">
+  <g mask="url(#fadeMask)">
+    <g opacity="0.1">
     <!-- Expanding circles -->
     <circle cx="150" cy="120" r="20" fill="#3b82f6">
       <animate attributeName="r" values="20;60;20" dur="8s" repeatCount="indefinite"/>
@@ -95,7 +111,7 @@
     </g>
 
     <!-- Distant mountains -->
-    <g opacity="0.3" fill="#6B7280">
+    <g opacity="0.3" fill="#1e293b">
       <polygon points="0,250 100,150 200,250"/>
       <polygon points="150,240 250,140 350,240"/>
       <polygon points="300,260 400,160 500,260"/>
@@ -117,50 +133,50 @@
     </g>
 
     <!-- Distant trees -->
-    <g opacity="0.4">
+    <g opacity="0.5">
       <!-- Tree 1 -->
       <rect x="76" y="220" width="8" height="100" fill="#8B4513"/>
-      <ellipse cx="80" cy="200" rx="30" ry="35" fill="#047857"/>
+      <ellipse cx="80" cy="200" rx="30" ry="35" fill="#16a34a"/>
       <!-- Tree 2 -->
       <rect x="146" y="210" width="8" height="110" fill="#8B4513"/>
-      <ellipse cx="150" cy="190" rx="35" ry="40" fill="#059669"/>
+      <ellipse cx="150" cy="190" rx="35" ry="40" fill="#16a34a"/>
       <!-- Tree 3 -->
       <rect x="246" y="230" width="8" height="90" fill="#8B4513"/>
-      <ellipse cx="250" cy="210" rx="25" ry="30" fill="#047857"/>
+      <ellipse cx="250" cy="210" rx="25" ry="30" fill="#16a34a"/>
       <!-- Tree 4 -->
       <rect x="396" y="200" width="8" height="120" fill="#8B4513"/>
-      <ellipse cx="400" cy="180" rx="40" ry="45" fill="#059669"/>
+      <ellipse cx="400" cy="180" rx="40" ry="45" fill="#16a34a"/>
       <!-- Tree 5 -->
       <rect x="546" y="215" width="8" height="105" fill="#8B4513"/>
-      <ellipse cx="550" cy="195" rx="32" ry="37" fill="#047857"/>
+      <ellipse cx="550" cy="195" rx="32" ry="37" fill="#16a34a"/>
       <!-- Tree 6 -->
       <rect x="316" y="225" width="8" height="95" fill="#8B4513"/>
-      <ellipse cx="320" cy="205" rx="27" ry="32" fill="#047857"/>
+      <ellipse cx="320" cy="205" rx="27" ry="32" fill="#16a34a"/>
       <!-- Tree 7 -->
       <rect x="476" y="205" width="8" height="115" fill="#8B4513"/>
-      <ellipse cx="480" cy="185" rx="30" ry="35" fill="#059669"/>
+      <ellipse cx="480" cy="185" rx="30" ry="35" fill="#16a34a"/>
       <!-- Duplicates for continuous scroll -->
       <!-- Tree 1 dup -->
       <rect x="676" y="220" width="8" height="100" fill="#8B4513"/>
-      <ellipse cx="680" cy="200" rx="30" ry="35" fill="#047857"/>
+      <ellipse cx="680" cy="200" rx="30" ry="35" fill="#16a34a"/>
       <!-- Tree 2 dup -->
       <rect x="746" y="210" width="8" height="110" fill="#8B4513"/>
-      <ellipse cx="750" cy="190" rx="35" ry="40" fill="#059669"/>
+      <ellipse cx="750" cy="190" rx="35" ry="40" fill="#16a34a"/>
       <!-- Tree 3 dup -->
       <rect x="846" y="230" width="8" height="90" fill="#8B4513"/>
-      <ellipse cx="850" cy="210" rx="25" ry="30" fill="#047857"/>
+      <ellipse cx="850" cy="210" rx="25" ry="30" fill="#16a34a"/>
       <!-- Tree 4 dup -->
       <rect x="996" y="200" width="8" height="120" fill="#8B4513"/>
-      <ellipse cx="1000" cy="180" rx="40" ry="45" fill="#059669"/>
+      <ellipse cx="1000" cy="180" rx="40" ry="45" fill="#16a34a"/>
       <!-- Tree 5 dup -->
       <rect x="1146" y="215" width="8" height="105" fill="#8B4513"/>
-      <ellipse cx="1150" cy="195" rx="32" ry="37" fill="#047857"/>
+      <ellipse cx="1150" cy="195" rx="32" ry="37" fill="#16a34a"/>
       <!-- Tree 6 dup -->
       <rect x="916" y="225" width="8" height="95" fill="#8B4513"/>
-      <ellipse cx="920" cy="205" rx="27" ry="32" fill="#047857"/>
+      <ellipse cx="920" cy="205" rx="27" ry="32" fill="#16a34a"/>
       <!-- Tree 7 dup -->
       <rect x="1076" y="205" width="8" height="115" fill="#8B4513"/>
-      <ellipse cx="1080" cy="185" rx="30" ry="35" fill="#059669"/>
+      <ellipse cx="1080" cy="185" rx="30" ry="35" fill="#16a34a"/>
       <animateTransform attributeName="transform" type="translate" from="0 0" to="-600 0" dur="12s" repeatCount="indefinite"/>
     </g>
 
@@ -235,6 +251,7 @@
         dur="4s"
         repeatCount="indefinite"/>
     </g>
+  </g>
   </g>
 
 </svg>

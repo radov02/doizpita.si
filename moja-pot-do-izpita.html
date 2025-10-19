@@ -612,30 +612,43 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/progress.js"></script>
-    
+
     <!-- Login Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Prijava</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
           </div>
           <div class="modal-body">
             <form>
               <div class="mb-3">
                 <label for="email" class="form-label">E-poštni naslov</label>
-                <input type="email" class="form-control" id="email" required>
+                <input type="email" class="form-control" id="email" required />
               </div>
               <div class="mb-3">
                 <label for="password" class="form-label">Geslo</label>
-                <input type="password" class="form-control" id="password" required>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  required
+                />
               </div>
               <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="remember">
-                <label class="form-check-label" for="remember">Zapomni si me</label>
+                <input type="checkbox" class="form-check-input" id="remember" />
+                <label class="form-check-label" for="remember"
+                  >Zapomni si me</label
+                >
               </div>
-              <button type="submit" class="btn btn-primary w-100">Prijaví se</button>
+              <button type="submit" class="btn btn-primary w-100">
+                Prijaví se
+              </button>
             </form>
             <div class="text-center mt-3">
               <a href="#" class="text-decoration-none">Pozabljeno geslo?</a>
@@ -644,45 +657,72 @@
         </div>
       </div>
     </div>
-    
+
     <!-- Register Modal -->
     <div class="modal fade" id="registerModal" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Registracija</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
           </div>
           <div class="modal-body">
             <form>
               <div class="mb-3">
                 <label for="regName" class="form-label">Ime in priimek</label>
-                <input type="text" class="form-control" id="regName" required>
+                <input type="text" class="form-control" id="regName" required />
               </div>
               <div class="mb-3">
                 <label for="regEmail" class="form-label">E-poštni naslov</label>
-                <input type="email" class="form-control" id="regEmail" required>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="regEmail"
+                  required
+                />
               </div>
               <div class="mb-3">
                 <label for="regPassword" class="form-label">Geslo</label>
-                <input type="password" class="form-control" id="regPassword" required>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="regPassword"
+                  required
+                />
               </div>
               <div class="mb-3">
-                <label for="regPasswordConfirm" class="form-label">Ponovite geslo</label>
-                <input type="password" class="form-control" id="regPasswordConfirm" required>
+                <label for="regPasswordConfirm" class="form-label"
+                  >Ponovite geslo</label
+                >
+                <input
+                  type="password"
+                  class="form-control"
+                  id="regPasswordConfirm"
+                  required
+                />
               </div>
               <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="terms" required>
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="terms"
+                  required
+                />
                 <label class="form-check-label" for="terms">
                   Strinjam se s <a href="#">pogoji uporabe</a>
                 </label>
               </div>
-              <button type="submit" class="btn btn-primary w-100">Registriraj se</button>
+              <button type="submit" class="btn btn-primary w-100">
+                Registriraj se
+              </button>
             </form>
           </div>
         </div>
       </div>
     </div>
-
   </body>
 </html>

@@ -233,7 +233,7 @@
                                     </div>
 
                                     <div class="d-grid gap-2">
-                                        <button class="btn btn-primary">
+                                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reserveModal">
                                             <i class="bi bi-calendar-plus me-1"></i>
                                             Rezerviraj
                                         </button>
@@ -317,7 +317,7 @@
                                     </div>
 
                                     <div class="d-grid gap-2">
-                                        <button class="btn btn-primary">
+                                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reserveModal">
                                             <i class="bi bi-calendar-plus me-1"></i>
                                             Rezerviraj
                                         </button>
@@ -392,6 +392,50 @@
         </div>
     </div>
 
+        <!-- Reserve Modal -->
+        <div class="modal fade" id="reserveModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Rezerviraj termin</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label class="form-label">Ponudnik</label>
+                                <select class="form-select"><option>Izberite ponudnika</option></select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Datum</label>
+                                <input type="date" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <button class="btn btn-primary">Potrdi</button>
+                                <button type="button" class="btn btn-outline-secondary ms-2" data-bs-dismiss="modal">Zapri</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Terms Modal -->
+        <div class="modal fade" id="termsModal" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Pogoji uporabe</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="text-muted">Splošni pogoji uporabe DoIzpita.si.</p>
+                        <div class="text-end"><button class="btn btn-secondary" data-bs-dismiss="modal">Zapri</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     <!-- Register Modal -->
     <div class="modal fade" id="registerModal" tabindex="-1">
         <div class="modal-dialog">
@@ -421,7 +465,7 @@
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="terms" required>
                             <label class="form-check-label" for="terms">
-                                Strinjam se s <a href="#">pogoji uporabe</a>
+                                Strinjam se s <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">pogoji uporabe</a>
                             </label>
                         </div>
                         <button type="submit" class="btn btn-primary w-100">Registriraj se</button>

@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <!-- Character encoding - must be first -->
+    <meta charset="UTF-8">
+    
+    <!-- Viewport for responsive design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Pogosto zastavljena vprašanja o pridobivanju vozniškega dovoljenja na DoIzpita.si. Vse kar morate vedeti o procesu, stroških, rokih in več.">
+    <meta name="keywords" content="FAQ, vprašanja, vozniško dovoljenje, avtošola, CPP, zdravniški pregled">
+    <meta name="author" content="DoIzpita.si">
+    
+    <!-- Page Title -->
+    <title>Pogosta vprašanja (FAQ) - DoIzpita.si</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    
+    <!-- CSS Resources - External first, then custom -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    
+    <style>
+        .faq-category {
+            margin-bottom: 3rem;
+        }
+        
+        .faq-category-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .accordion-button:not(.collapsed) {
+            background-color: #dbeafe;
+            color: var(--primary-color);
+        }
+        
+        .accordion-button:focus {
+            box-shadow: 0 0 0 0.25rem rgba(37, 99, 235, 0.25);
+            border-color: var(--primary-color);
+        }
+        
+        .accordion-item {
+            border: 1px solid var(--border-color);
+            margin-bottom: 0.5rem;
+            border-radius: 8px !important;
+            overflow: hidden;
+        }
+        
+        .accordion-button {
+            font-weight: 600;
+            padding: 1rem 1.25rem;
+        }
+        
+        .accordion-body {
+            padding: 1.25rem;
+            color: var(--text-secondary);
+        }
+        
+        .search-faq {
+            position: relative;
+        }
+        
+        .search-faq .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+        }
+        
+        .search-faq input {
+            padding-left: 2.75rem;
+        }
+        
+        .quick-links {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        
+        .quick-link-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+        
+        .quick-link-item:hover {
+            background-color: white;
+            transform: translateX(5px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .quick-link-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+
+<body class="with-navbar-offset">
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="visually-hidden-focusable">Preskoči na glavno vsebino</a>
+    
+    <!-- Header Navigation -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm" role="navigation" aria-label="Glavna navigacija">
+            <div class="container">
+                <a class="navbar-brand fw-bold text-primary" href="index.html" aria-label="Domov - DoIzpita.si">
+                    DoIzpita.si
+                </a>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Preklopi navigacijo">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Domov</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="moja-pot-do-izpita.html">Moja pot do izpita</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="avtosole-seznam.html">Seznam avtošol</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Storitve
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="zdravniski-pregled.html">Zdravniški pregled</a></li>
+                                <li><a class="dropdown-item" href="CPP-predavanja.html">CPP predavanja</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="o-nas.html">O nas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="FAQ.html" aria-current="page">FAQ</a>
+                        </li>
+                    </ul>
+                    
+                    <div class="d-flex">
+                        <button class="btn btn-outline-primary me-2" type="button" data-bs-toggle="modal" data-bs-target="#loginModal" aria-label="Odpri obrazec za prijavo">Prijava</button>
+                        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#registerModal" aria-label="Odpri obrazec za registracijo">Registracija</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="container mt-5 pt-4">
+        <!-- Header Section -->
+        <div class="row mb-5 page-header">
+            <div class="col-12 text-center">
+                <h1 class="display-5 fw-bold mb-3">Pogosto zastavljena vprašanja</h1>
+                <p class="lead text-muted mb-4">Vse kar potrebujete vedeti o pridobivanju vozniškega dovoljenja</p>
+                
+                <!-- Search Box -->
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="search-faq">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" class="form-control form-control-lg" id="faqSearch" placeholder="Poiščite odgovor na vaše vprašanje...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Main FAQ Content -->
+            <div class="col-lg-8">
+                <!-- General Questions -->
+                <div class="faq-category" id="splosno">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="faq-category-icon bg-primary text-white">
+                            <i class="bi bi-info-circle fs-4"></i>
+                        </div>
+                        <h2 class="h4 fw-bold ms-3 mb-0">Splošna vprašanja</h2>
+                    </div>
+                    
+                    <div class="accordion" id="accordionGeneral">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#general1" aria-expanded="true">
+                                    Kako deluje platforma DoIzpita.si?
+                                </button>
+                            </h3>
+                            <div id="general1" class="accordion-collapse collapse show" data-bs-parent="#accordionGeneral">
+                                <div class="accordion-body">
+                                    DoIzpita.si je centralna platforma, ki združuje vse storitve potrebne za pridobitev vozniškega dovoljenja. Na enem mestu lahko poiščete avtošole, rezervirate zdravniški pregled, se prijavite na CPP predavanja in spremljate svoj napredek do cilja.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#general2">
+                                    Ali je uporaba platforme brezplačna?
+                                </button>
+                            </h3>
+                            <div id="general2" class="accordion-collapse collapse" data-bs-parent="#accordionGeneral">
+                                <div class="accordion-body">
+                                    Da, registracija in uporaba platforme DoIzpita.si je popolnoma brezplačna. Plačate samo za konkretne storitve (zdravniški pregled, CPP predavanja, ure vožnje), ki jih rezervirate pri ponudnikih.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#general3">
+                                    Ali je potrebna registracija?
+                                </button>
+                            </h3>
+                            <div id="general3" class="accordion-collapse collapse" data-bs-parent="#accordionGeneral">
+                                <div class="accordion-body">
+                                    Brskanje po ponudnikih je mogoče tudi brez registracije. Za rezervacijo terminov, spremljanje napredka in dostop do vseh funkcionalnosti pa je potrebna brezplačna registracija.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Health Check Questions -->
+                <div class="faq-category" id="zdravniski-pregled">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="faq-category-icon bg-success text-white">
+                            <i class="bi bi-hospital fs-4"></i>
+                        </div>
+                        <h2 class="h4 fw-bold ms-3 mb-0">Zdravniški pregled</h2>
+                    </div>
+                    
+                    <div class="accordion" id="accordionHealth">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#health1">
+                                    Kaj potrebujem za zdravniški pregled?
+                                </button>
+                            </h3>
+                            <div id="health1" class="accordion-collapse collapse" data-bs-parent="#accordionHealth">
+                                <div class="accordion-body">
+                                    Za zdravniški pregled potrebujete osebni dokument (osebna izkaznica ali potni list) in zdravstveno kartico. Priporočamo, da s seboj vzamete tudi očala ali leče, če jih običajno nosite.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#health2">
+                                    Koliko stane zdravniški pregled?
+                                </button>
+                            </h3>
+                            <div id="health2" class="accordion-collapse collapse" data-bs-parent="#accordionHealth">
+                                <div class="accordion-body">
+                                    Cena zdravniškega pregleda se razlikuje med ponudniki in je odvisna od kategorije vozniškega dovoljenja. Običajno se giblje med 20€ in 50€. Točne cene lahko preverite pri posameznih ponudnikih na naši platformi.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#health3">
+                                    Kako dolgo velja zdravniško potrdilo?
+                                </button>
+                            </h3>
+                            <div id="health3" class="accordion-collapse collapse" data-bs-parent="#accordionHealth">
+                                <div class="accordion-body">
+                                    Zdravniško potrdilo za pridobitev vozniškega dovoljenja velja 6 mesecev od datuma izdaje. V tem času morate opraviti oba izpita (teoretični in praktični).
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#health4">
+                                    Ali lahko opravim zdravniški pregled pri kateremkoli zdravniku?
+                                </button>
+                            </h3>
+                            <div id="health4" class="accordion-collapse collapse" data-bs-parent="#accordionHealth">
+                                <div class="accordion-body">
+                                    Ne, zdravniški pregled za vozniško dovoljenje lahko opravi le pooblaščen zdravnik v okviru medicine dela, prometa in športa. Seznam vseh pooblaščenih izvajalcev najdete na naši platformi.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CPP Course Questions -->
+                <div class="faq-category" id="cpp-predavanja">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="faq-category-icon bg-warning text-white">
+                            <i class="bi bi-book fs-4"></i>
+                        </div>
+                        <h2 class="h4 fw-bold ms-3 mb-0">CPP predavanja</h2>
+                    </div>
+                    
+                    <div class="accordion" id="accordionCPP">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cpp1">
+                                    Kaj je CPP tečaj?
+                                </button>
+                            </h3>
+                            <div id="cpp1" class="accordion-collapse collapse" data-bs-parent="#accordionCPP">
+                                <div class="accordion-body">
+                                    Tečaj CPP (Cestno prometni predpisi) je obvezni tečaj prometne vzgoje, ki obsega 30 šolskih ur teoretičnega pouka. Tečaj je predpogoj za pristop k teoretičnemu izpitu za vozniško dovoljenje.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cpp2">
+                                    Koliko stane CPP tečaj?
+                                </button>
+                            </h3>
+                            <div id="cpp2" class="accordion-collapse collapse" data-bs-parent="#accordionCPP">
+                                <div class="accordion-body">
+                                    Cena CPP tečaja se razlikuje med ponudniki in se običajno giblje med 150€ in 300€. Nekateri ponudniki ponujajo tudi spletne tečaje po nižji ceni.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cpp3">
+                                    Kako dolgo traja CPP tečaj?
+                                </button>
+                            </h3>
+                            <div id="cpp3" class="accordion-collapse collapse" data-bs-parent="#accordionCPP">
+                                <div class="accordion-body">
+                                    CPP tečaj obsega 30 šolskih ur in običajno traja od 1 do 2 tednov, odvisno od urnika izbranega ponudnika. Na voljo so tudi intenzivni tečaji, ki trajajo krajši čas.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cpp4">
+                                    Ali lahko CPP tečaj opravljam online?
+                                </button>
+                            </h3>
+                            <div id="cpp4" class="accordion-collapse collapse" data-bs-parent="#accordionCPP">
+                                <div class="accordion-body">
+                                    Da, večina ponudnikov zdaj nudi možnost spletnih CPP tečajev. Ti so običajno cenovno ugodnejši in bolj prilagodljivi glede terminov. Preverite ponudbo na naši platformi.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Driving School Questions -->
+                <div class="faq-category" id="avtosola">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="faq-category-icon bg-info text-white">
+                            <i class="bi bi-car-front fs-4"></i>
+                        </div>
+                        <h2 class="h4 fw-bold ms-3 mb-0">Avtošola in vožnje</h2>
+                    </div>
+                    
+                    <div class="accordion" id="accordionDriving">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#driving1">
+                                    Koliko ur vožnje potrebujem?
+                                </button>
+                            </h3>
+                            <div id="driving1" class="accordion-collapse collapse" data-bs-parent="#accordionDriving">
+                                <div class="accordion-body">
+                                    Zakonsko določeno minimalno število ur vožnje je 25 ur za kategorijo B. Vendar se dejansko potrebno število razlikuje glede na posameznika - nekateri potrebujejo več, drugi manj. Povprečje je med 30 in 40 ur.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#driving2">
+                                    Koliko stane ura vožnje?
+                                </button>
+                            </h3>
+                            <div id="driving2" class="accordion-collapse collapse" data-bs-parent="#accordionDriving">
+                                <div class="accordion-body">
+                                    Cena ure vožnje se razlikuje med avtošolami in regijami ter se običajno giblje med 30€ in 50€ na uro. Večina avtošol ponuja tudi pakete z nižjo ceno na uro.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#driving3">
+                                    Kako izberem pravega inštruktorja?
+                                </button>
+                            </h3>
+                            <div id="driving3" class="accordion-collapse collapse" data-bs-parent="#accordionDriving">
+                                <div class="accordion-body">
+                                    Pri izbiri inštruktorja upoštevajte ocene in mnenja drugih uporabnikov, razpoložljivost terminov, cene ter osebno kemijo. Pomembno je, da se počutite sproščeno in da je inštruktor potrpežljiv. Na naši platformi lahko preverite ocene in komentarje drugih učencev.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#driving4">
+                                    Ali lahko spremenim inštruktorja ali avtošolo?
+                                </button>
+                            </h3>
+                            <div id="driving4" class="accordion-collapse collapse" data-bs-parent="#accordionDriving">
+                                <div class="accordion-body">
+                                    Da, inštruktorja ali avtošolo lahko kadarkoli spremеnite. Priporočamo, da se najprej pogovorite z avtošolo o morebitnih stroških ali pogojih za zamenjavo.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exam Questions -->
+                <div class="faq-category" id="izpiti">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="faq-category-icon bg-danger text-white">
+                            <i class="bi bi-clipboard-check fs-4"></i>
+                        </div>
+                        <h2 class="h4 fw-bold ms-3 mb-0">Izpiti</h2>
+                    </div>
+                    
+                    <div class="accordion" id="accordionExam">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#exam1">
+                                    Kdaj lahko pridem na teoretični izpit?
+                                </button>
+                            </h3>
+                            <div id="exam1" class="accordion-collapse collapse" data-bs-parent="#accordionExam">
+                                <div class="accordion-body">
+                                    Na teoretični izpit se lahko prijavite po opravljenem CPP tečaju in zdravniškem pregledu. Izpit lahko opravljate, ko ste stari najmanj 17 let in 6 mesecev.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#exam2">
+                                    Koliko vprašanj je na teoretičnem izpitu?
+                                </button>
+                            </h3>
+                            <div id="exam2" class="accordion-collapse collapse" data-bs-parent="#accordionExam">
+                                <div class="accordion-body">
+                                    Teoretični izpit za kategorijo B vsebuje 40 vprašanj. Za uspešno opravljeni izpit potrebujete najmanj 33 pravilnih odgovorov (82,5%). Izpit traja 45 minut.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#exam3">
+                                    Kaj če padem na izpitu?
+                                </button>
+                            </h3>
+                            <div id="exam3" class="accordion-collapse collapse" data-bs-parent="#accordionExam">
+                                <div class="accordion-body">
+                                    Če ne opravite izpita, ga lahko ponavljate. Med dvema poskusoma mora preteči najmanj 7 dni za teoretični izpit in 14 dni za praktični izpit. Število poskusov ni omejeno.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#exam4">
+                                    Koliko stane izpit?
+                                </button>
+                            </h3>
+                            <div id="exam4" class="accordion-collapse collapse" data-bs-parent="#accordionExam">
+                                <div class="accordion-body">
+                                    Teoretični izpit stane približno 30€, praktični izpit pa okoli 60€. Cene lahko variirajo glede na upravno enoto. Za ponavljanje izpita se plača enaka pristojbina.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#exam5">
+                                    Kako dolgo traja praktični izpit?
+                                </button>
+                            </h3>
+                            <div id="exam5" class="accordion-collapse collapse" data-bs-parent="#accordionExam">
+                                <div class="accordion-body">
+                                    Praktični izpit za kategorijo B traja približno 45 minut in vključuje vožnjo po različnih prometnih situacijah (mesto, zunaj mesta, hitri prometni pas). Pred začetkom vožnje morate opraviti tudi osnovne tehnične preverjanje vozila.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cost Questions -->
+                <div class="faq-category" id="stroski">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="faq-category-icon bg-secondary text-white">
+                            <i class="bi bi-currency-euro fs-4"></i>
+                        </div>
+                        <h2 class="h4 fw-bold ms-3 mb-0">Stroški</h2>
+                    </div>
+                    
+                    <div class="accordion" id="accordionCosts">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cost1">
+                                    Koliko v povprečju stane vozniško dovoljenje?
+                                </button>
+                            </h3>
+                            <div id="cost1" class="accordion-collapse collapse" data-bs-parent="#accordionCosts">
+                                <div class="accordion-body">
+                                    Skupni stroški pridobitve vozniškega dovoljenja kategorije B se običajno gibljejo med 1.000€ in 1.800€. To vključuje zdravniški pregled (25-50€), CPP tečaj (150-300€), ure vožnje (900-1500€), izpita (90€) in administrativne stroške.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cost2">
+                                    Ali obstajajo kakšne subvencije ali popusti?
+                                </button>
+                            </h3>
+                            <div id="cost2" class="accordion-collapse collapse" data-bs-parent="#accordionCosts">
+                                <div class="accordion-body">
+                                    Nekatere avtošole ponujajo popuste za študente, pakete z znižano ceno ali družinske popuste. Preverite ponudbo posameznih avtošol na naši platformi. V nekaterih primerih so možne tudi subvencije preko zavoda za zaposlovanje.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cost3">
+                                    Ali lahko plačujem na obroke?
+                                </button>
+                            </h3>
+                            <div id="cost3" class="accordion-collapse collapse" data-bs-parent="#accordionCosts">
+                                <div class="accordion-body">
+                                    Veliko avtošol omogoča plačilo na obroke. Pogoji se razlikujejo med ponudniki - nekateri zahtevajo polog, drugi omogočajo plačilo po posameznih urah. Možnosti najdete v opisih posameznih avtošol.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar with Quick Links -->
+            <div class="col-lg-4">
+                <div class="quick-links sticky-top" style="top: 100px;">
+                    <h3 class="h5 fw-bold mb-3">Hitre povezave</h3>
+                    
+                    <a href="#splosno" class="quick-link-item">
+                        <div class="quick-link-icon bg-primary text-white">
+                            <i class="bi bi-info-circle"></i>
+                        </div>
+                        <div>
+                            <div class="fw-semibold">Splošna vprašanja</div>
+                            <div class="small text-muted">O platformi in uporabi</div>
+                        </div>
+                    </a>
+                    
+                    <a href="#zdravniski-pregled" class="quick-link-item">
+                        <div class="quick-link-icon bg-success text-white">
+                            <i class="bi bi-hospital"></i>
+                        </div>
+                        <div>
+                            <div class="fw-semibold">Zdravniški pregled</div>
+                            <div class="small text-muted">Pogoji in postopek</div>
+                        </div>
+                    </a>
+                    
+                    <a href="#cpp-predavanja" class="quick-link-item">
+                        <div class="quick-link-icon bg-warning text-white">
+                            <i class="bi bi-book"></i>
+                        </div>
+                        <div>
+                            <div class="fw-semibold">CPP predavanja</div>
+                            <div class="small text-muted">Tečaji in termini</div>
+                        </div>
+                    </a>
+                    
+                    <a href="#avtosola" class="quick-link-item">
+                        <div class="quick-link-icon bg-info text-white">
+                            <i class="bi bi-car-front"></i>
+                        </div>
+                        <div>
+                            <div class="fw-semibold">Avtošola in vožnje</div>
+                            <div class="small text-muted">Izbira in rezervacija</div>
+                        </div>
+                    </a>
+                    
+                    <a href="#izpiti" class="quick-link-item">
+                        <div class="quick-link-icon bg-danger text-white">
+                            <i class="bi bi-clipboard-check"></i>
+                        </div>
+                        <div>
+                            <div class="fw-semibold">Izpiti</div>
+                            <div class="small text-muted">Teorija in praksa</div>
+                        </div>
+                    </a>
+                    
+                    <a href="#stroski" class="quick-link-item">
+                        <div class="quick-link-icon bg-secondary text-white">
+                            <i class="bi bi-currency-euro"></i>
+                        </div>
+                        <div>
+                            <div class="fw-semibold">Stroški</div>
+                            <div class="small text-muted">Cene in popusti</div>
+                        </div>
+                    </a>
+                    
+                    <hr class="my-3">
+                    
+                    <div class="text-center">
+                        <p class="small text-muted mb-3">Niste našli odgovora?</p>
+                        <a href="pomoc.html" class="btn btn-outline-primary btn-sm w-100 mb-2">
+                            <i class="bi bi-headset me-1"></i>
+                            Kontaktirajte podporo
+                        </a>
+                        <a href="moja-pot-do-izpita.html" class="btn btn-primary btn-sm w-100">
+                            <i class="bi bi-map me-1"></i>
+                            Začni svojo pot
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <section class="cta-section bg-primary text-white py-5 rounded-3 mt-5" aria-labelledby="cta-heading">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-8 px-lg-5">
+                        <h2 id="cta-heading" class="h3 fw-bold mb-3">Pripravljeni za začetek?</h2>
+                        <p class="mb-0">Registrirajte se in začnite svojo pot do vozniškega dovoljenja še danes.</p>
+                    </div>
+                    <div class="col-lg-4 text-lg-end mt-3 mt-lg-0 px-lg-5">
+                        <button class="btn btn-light btn-lg" type="button" data-bs-toggle="modal" data-bs-target="#registerModal" aria-label="Odpri obrazec za registracijo">
+                            Registriraj se brezplačno!
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5 mt-5" role="contentinfo">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h2 class="h5 fw-bold mb-3">DoIzpita.si</h2>
+                    <p class="text-muted">Ena platforma za uspešno pridobitev vozniškega dovoljenja.</p>
+                    <nav aria-label="Družbena omrežja">
+                        <ul class="social-links list-unstyled d-flex gap-3">
+                            <li><a href="#" class="text-white" aria-label="Sledite nam na Facebooku"><i class="bi bi-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="#" class="text-white" aria-label="Sledite nam na Instagramu"><i class="bi bi-instagram" aria-hidden="true"></i></a></li>
+                            <li><a href="#" class="text-white" aria-label="Sledite nam na LinkedInu"><i class="bi bi-linkedin" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h3 class="h6 fw-semibold mb-3">Storitve</h3>
+                    <nav aria-label="Storitve">
+                        <ul class="list-unstyled">
+                            <li><a href="zdravniski-pregled.html" class="text-muted text-decoration-none">Zdravniški pregled</a></li>
+                            <li><a href="CPP-predavanja.html" class="text-muted text-decoration-none">CPP predavanja</a></li>
+                            <li><a href="avtosole-seznam.html" class="text-muted text-decoration-none">Avtošole</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h3 class="h6 fw-semibold mb-3">Podpora</h3>
+                    <nav aria-label="Podpora">
+                        <ul class="list-unstyled">
+                            <li><a href="pomoc.html" class="text-muted text-decoration-none">Pomoč</a></li>
+                            <li><a href="#" class="text-muted text-decoration-none">Kontakt</a></li>
+                            <li><a href="FAQ.html" class="text-muted text-decoration-none">FAQ</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h3 class="h6 fw-semibold mb-3">Podjetje</h3>
+                    <nav aria-label="O podjetju">
+                        <ul class="list-unstyled">
+                            <li><a href="o-nas.html" class="text-muted text-decoration-none">O nas</a></li>
+                            <li><a href="#" class="text-muted text-decoration-none">Kariera</a></li>
+                            <li><a href="novice.html" class="text-muted text-decoration-none">Novice</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h3 class="h6 fw-semibold mb-3">Pravno</h3>
+                    <nav aria-label="Pravno">
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-muted text-decoration-none">Pogoji uporabe</a></li>
+                            <li><a href="#" class="text-muted text-decoration-none">Zasebnost</a></li>
+                            <li><a href="#" class="text-muted text-decoration-none">Piškotki</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center text-muted">
+                <p>&copy; 2025 DoIzpita.si. Vse pravice pridržane.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Prijava</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zapri"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">E-poštni naslov</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Geslo</label>
+                            <input type="password" class="form-control" id="password" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="remember">
+                            <label class="form-check-label" for="remember">Zapomni si me</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Prijaví se</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <a href="#" class="text-decoration-none">Pozabljeno geslo?</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerModalLabel">Registracija</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zapri"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="regName" class="form-label">Ime in priimek</label>
+                            <input type="text" class="form-control" id="regName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="regEmail" class="form-label">E-poštni naslov</label>
+                            <input type="email" class="form-control" id="regEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="regPassword" class="form-label">Geslo</label>
+                            <input type="password" class="form-control" id="regPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="regPasswordConfirm" class="form-label">Ponovite geslo</label>
+                            <input type="password" class="form-control" id="regPasswordConfirm" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="terms" required>
+                            <label class="form-check-label" for="terms">
+                                Strinjam se s <a href="#">pogoji uporabe</a>
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Registriraj se</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- FAQ Search Functionality -->
+    <script>
+        // Simple FAQ search functionality
+        document.getElementById('faqSearch').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const accordionItems = document.querySelectorAll('.accordion-item');
+            
+            accordionItems.forEach(item => {
+                const question = item.querySelector('.accordion-button').textContent.toLowerCase();
+                const answer = item.querySelector('.accordion-body').textContent.toLowerCase();
+                
+                if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                    item.style.display = '';
+                    
+                    // Highlight matching items
+                    if (searchTerm.length > 2) {
+                        item.classList.add('border-primary');
+                    } else {
+                        item.classList.remove('border-primary');
+                    }
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            // Show message if no results
+            const visibleItems = document.querySelectorAll('.accordion-item[style=""]').length;
+            const noResultsMsg = document.getElementById('noResults');
+            
+            if (visibleItems === 0 && searchTerm.length > 0) {
+                if (!noResultsMsg) {
+                    const msg = document.createElement('div');
+                    msg.id = 'noResults';
+                    msg.className = 'alert alert-info text-center';
+                    msg.innerHTML = '<i class="bi bi-search me-2"></i>Ni zadetkov za vaše iskanje. Poskusite z drugimi ključnimi besedami.';
+                    document.querySelector('.col-lg-8').appendChild(msg);
+                }
+            } else if (noResultsMsg) {
+                noResultsMsg.remove();
+            }
+        });
+        
+        // Smooth scroll for quick links
+        document.querySelectorAll('.quick-link-item').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    const offset = 100; // Account for fixed navbar
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
